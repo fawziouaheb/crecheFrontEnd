@@ -1,0 +1,17 @@
+<div class="form-group floating-group mb-4">
+  <input
+    [type]="type"
+    class="form-control floating-input"
+    [formControl]="control"
+    [ngClass]="{ 'border-error': showError }"
+  />
+
+  <label class="floating-label" [ngClass]="{ 'text-danger': showError }">
+    {{ label }}
+    <span *ngIf="isRequired" class="text-danger">*</span>
+  </label>
+
+  <div class="error-message text-danger">
+    <small *ngIf="showError">{{ errorMessage }}</small>
+  </div>
+</div>

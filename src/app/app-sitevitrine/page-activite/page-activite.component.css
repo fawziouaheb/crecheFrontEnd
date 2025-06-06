@@ -1,0 +1,256 @@
+/* -------- TITRE -------- */
+h2 {
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
+  color: #8EACCD;
+  text-align: center;
+  margin: 50px 0 -20px 0;
+  font-size: clamp(20px, 5vw, 36px); /* Taille de police dynamique */
+  max-width: 100%; /* Assure que le titre ne dépasse pas */
+  word-wrap: break-word; /* Permet de couper le mot si nécessaire */
+  overflow-wrap: break-word; /* Prévient le débordement */
+}
+
+/* -------- GALERIE -------- */
+.gallery-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height: 100vh;
+}
+
+.image-container {
+  width: 800px;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 2px solid #8EACCD;
+  border-radius: 15px;
+  position: relative;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+button {
+  background-color: rgba(142, 172, 205, 0.8);
+  color: #ffffff;
+  border: none;
+  padding: 15px;
+  font-size: clamp(18px, 2vw, 24px); /* Dynamique */
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: rgba(142, 172, 205, 1);
+}
+
+.prev {
+  left: 210px;
+}
+
+.next {
+  right: 210px;
+}
+
+/* -------- IMAGE + DESCRIPTION -------- */
+.image-description-container {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+}
+
+.image-description-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 40px;
+}
+
+
+/* Description fixe taille identique à image */
+.description-box {
+  flex: 1; /* prend l’espace restant à côté de l’image */
+  max-width: 500px; /* largeur fixe aussi */
+  height: 350px;     /* même hauteur que l’image */
+  overflow-y: auto;  /* scroll si description trop longue */
+  padding: 15px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.image-box {
+  width: 500px;
+  height: 350px;
+  overflow: hidden;
+  border-radius: 30px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.image-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Remplit le container en recadrant si nécessaire */
+  border-radius: 30px;
+  display: block;
+}
+
+
+
+
+.activity-name {
+  font-size: clamp(16px, 2vw, 18px); /* Dynamique */
+  font-weight: bold;
+  color: #8EACCD;
+  margin-bottom: 10px;
+  text-align: center;
+}
+/* Ajouter un espace sous les éléments de description (image + description) */
+.image-description-container {
+  margin-bottom: 50px; /* Ajoute de l'espace après la section image + description */
+}
+
+/* Description texte scrollable */
+.description {
+  overflow-y: auto;
+  max-height: 320px; /* un peu moins que la box pour le padding */
+  word-wrap: break-word;
+  word-break: break-word;
+  white-space: pre-line;
+  font-size: clamp(14px, 2vw, 16px);
+  color: #555;
+  text-align: left;
+  line-height: 1.4;
+  padding-right: 5px;
+}
+
+
+.image-description-item.reverse {
+  flex-direction: row-reverse;
+}
+
+/* -------- RESPONSIVE DESIGN -------- */
+
+/* ✅ Responsive uniquement pour les écrans ≤ 1024px */
+@media (max-width: 1024px) {
+  .gallery-container {
+    flex-direction: column;
+    height: auto;
+    padding: 20px;
+  }
+
+  .image-container {
+    width: 90%;
+    max-width: 800px;
+    height: auto;
+    max-height: 400px;
+    position: relative;
+  }
+
+  /* ✅ Flèches à gauche et à droite de l'image */
+  .prev,
+  .next {
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    padding: 10px;
+  }
+
+  .prev {
+    left: 10px;
+    /* Collée sur le côté gauche */
+  }
+
+  .next {
+    right: 10px;
+    /* Collée sur le côté droit */
+  }
+
+  .image-description-item {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    align-items: stretch; /* pour que image et description aient même hauteur */
+    width: 100%;
+    max-width: 1000px; /* ou ce que tu veux pour limiter la largeur */
+  }
+
+  .image-description-item.reverse {
+    flex-direction: column;
+  }
+
+  .image-box,
+  .description-box {
+    width: 90%;
+    max-width: 500px;
+    height: auto;
+  }
+
+  .activity-name {
+    font-size: clamp(14px, 2vw, 16px);
+  }
+
+  .description {
+    font-size: clamp(12px, 2vw, 14px);
+    text-align: justify;
+  }
+}
+
+/* ✅ Responsive spécifique aux petits écrans (≤ 768px) */
+@media (max-width: 768px) {
+
+  .prev,
+  .next {
+    font-size: 18px;
+    padding: 8px;
+  }
+
+  .prev {
+    left: 5px;
+  }
+
+  .next {
+    right: 5px;
+  }
+
+  .activity-name {
+    font-size: 15px;
+  }
+
+  .description {
+    font-size: 13px;
+  }
+}
+
+
+.description::-webkit-scrollbar {
+  width: 8px;
+}
+
+.description::-webkit-scrollbar-thumb {
+  background-color: #8EACCD;
+  border-radius: 10px;
+}
+
+.description::-webkit-scrollbar-track {
+  background: transparent;
+}

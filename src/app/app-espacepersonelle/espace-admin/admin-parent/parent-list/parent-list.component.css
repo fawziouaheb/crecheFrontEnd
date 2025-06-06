@@ -1,0 +1,91 @@
+/* Définir la couleur primaire */
+.primary-color {
+  color: #FF6F61;
+}
+
+/* Styliser le tableau */
+.table th,
+.table td {
+  padding: 0.5rem; /* Réduction maximale de l'espacement */
+  text-align: center;
+  font-size: 0.8rem; /* Texte plus petit */
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  transition: background-color 0.3s ease;
+  word-wrap: break-word;
+}
+
+/* Couleur de survol des lignes */
+.table tbody tr:hover {
+  background-color: #FFEB3B;
+  cursor: pointer;
+}
+
+/* Bordures */
+.table-bordered {
+  border: 1px solid #8EACCD;
+}
+
+.table-bordered th,
+.table-bordered td {
+  border: 1px solid #8EACCD;
+}
+
+/* Rendre le tableau responsive */
+.table-responsive-md {
+  overflow-x: auto;
+  display: block;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Ajustements pour tablettes */
+@media (max-width: 992px) {
+  .table {
+      font-size: 0.75rem; /* Encore plus petit */
+  }
+
+  .table th, .table td {
+      padding: 0.4rem;
+  }
+}
+
+/* Ajustements pour mobiles */
+@media (max-width: 768px) {
+  .table {
+      font-size: 0.7rem;
+  }
+
+  .table th, .table td {
+      padding: 0.3rem;
+  }
+
+  /* Réduction de la taille des boutons */
+  .btn-sm {
+      font-size: 0.7rem;
+      padding: 2px 4px;
+  }
+}
+
+/* Ajustements pour les très petits écrans */
+@media (max-width: 576px) {
+  .table-responsive-md {
+      border: none;
+      padding: 0;
+  }
+
+  .table {
+      font-size: 0.65rem; /* Texte ultra petit */
+  }
+
+  .table th, .table td {
+      padding: 0.2rem;
+  }
+
+  h2 {
+      font-size: 1rem; /* Réduction du titre */
+  }
+
+  .btn {
+      font-size: 0.7rem;
+  }
+}

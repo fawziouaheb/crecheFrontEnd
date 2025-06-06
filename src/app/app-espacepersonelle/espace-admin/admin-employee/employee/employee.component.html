@@ -1,0 +1,130 @@
+<div class="container">
+  <h2 class="text-center">Ajouter un Employé</h2>
+
+  <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="lastName">Nom</label>
+      <input
+        id="lastName"
+        formControlName="lastName"
+        class="form-control"
+        type="text"
+        placeholder="Nom de l'employé"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="firstName">Prénom</label>
+      <input
+        id="firstName"
+        formControlName="firstName"
+        class="form-control"
+        type="text"
+        placeholder="Prénom de l'employé"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        id="email"
+        formControlName="email"
+        class="form-control"
+        type="email"
+        placeholder="Email de l'employé"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="dateBirth">Date de naissance</label>
+      <input
+        id="dateBirth"
+        formControlName="dateBirth"
+        class="form-control"
+        type="date"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="mobile">Téléphone</label>
+      <input
+        id="mobile"
+        formControlName="mobile"
+        class="form-control"
+        type="tel"
+        placeholder="Numéro de téléphone"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="typeContratct">Type de contrat</label>
+      <select
+        id="typeContratct"
+        formControlName="typeContratct"
+        class="form-control"
+      >
+        <option value="cdi">CDI</option>
+        <option value="alternant">Alternant(e)</option>
+        <option value="stage">Stage</option>
+        <option value="cdd">CDD</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="dateBeginContract">Date de début du contrat</label>
+      <input
+        id="dateBeginContract"
+        formControlName="dateBeginContract"
+        class="form-control"
+        type="date"
+      />
+    </div>
+
+    <!-- Affichage conditionnel -->
+    <div
+      class="form-group"
+      *ngIf="employeeForm.get('typeContratct')?.value !== 'cdi'"
+    >
+      <label for="dateEndContract">Date de fin du contrat</label>
+      <input
+        id="dateEndContract"
+        formControlName="dateEndContract"
+        class="form-control"
+        type="date"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="structureId">Structure</label>
+      <select
+        id="structureId"
+        formControlName="structureId"
+        class="form-control"
+      >
+        <option *ngFor="let structure of structures" [value]="structure.id">
+          {{ structure.structureName }}
+        </option>
+      </select>
+    </div>
+
+    <!-- Champ de rôle désactivé mais conservé -->
+    <!--
+    <div class="form-group">
+      <label for="roleId">Role</label>
+      <select id="roleId" formControlName="role" class="form-control">
+        <option *ngFor="let role of roles" [value]="role.roleName">
+          {{ role.roleName }}
+        </option>
+      </select>
+    </div>
+    -->
+
+    <button
+      type="submit"
+      class="btn btn-primary btn-block"
+      [disabled]="employeeForm.invalid"
+    >
+      Ajouter l'employé
+    </button>
+  </form>
+</div>

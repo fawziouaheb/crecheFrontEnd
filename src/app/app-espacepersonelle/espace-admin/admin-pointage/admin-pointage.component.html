@@ -1,0 +1,37 @@
+<div class="container mt-5">
+  
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h4 class="card-title mb-4 text-center">Pointer mes heures de travail manuellement</h4>
+  
+        <form (ngSubmit)="enregistrerManuel()">
+          <div class="mb-3">
+            <label for="heureArrivee" class="form-label">Heure d'arrivée</label>
+            <input type="time" id="heureArrivee" [(ngModel)]="heureArrivee" name="heureArrivee" class="form-control" required>
+          </div>
+  
+          <div class="mb-3">
+            <label for="heureDepart" class="form-label">Heure de départ</label>
+            <input type="time" id="heureDepart" [(ngModel)]="heureDepart" name="heureDepart" class="form-control" required>
+          </div>
+  
+          <button type="submit" class="btn btn-primary w-100">Enregistrer les horaires</button>
+        </form>
+  
+  
+        <h5 class="mt-4 text-center">Historique manuel</h5>
+        <ul class="list-group list-group-flush">
+          <li *ngFor="let pointage of historiqueManuel" class="list-group-item d-flex justify-content-between align-items-center">
+            <div>
+              📅 {{ pointage.dateSession }}<br>
+              🕑 {{ pointage.arrivalTime }} - {{ pointage.departureTime }}
+            </div>
+            <span class="badge bg-primary">{{ pointage.durationMinute }} min</span>
+          </li>
+        </ul>  
+            
+      </div>
+    </div>
+  
+  </div>
+  

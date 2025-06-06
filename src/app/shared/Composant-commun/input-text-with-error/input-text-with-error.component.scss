@@ -1,0 +1,32 @@
+/* Personnalisation des champs de saisie et du textarea */
+input.form-control,
+textarea.form-control {
+  border: 2px solid #8EACCD;
+  /* Couleur bleue de la page */
+  border-radius: 15px;
+  /* Arrondir les coins des champs */
+  padding: 0.5rem;
+  /* Ajouter un peu de padding pour espacer le texte des bords */
+}
+
+/* Ajouter un effet au focus des champs */
+input.form-control:focus,
+textarea.form-control:focus {
+  border-color: #8EACCD;
+  /* Couleur bleue plus foncée quand le champ est sélectionné */
+  box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
+  /* Ajout d'une légère ombre bleue */
+}
+
+/* Si vous voulez un espacement plus large autour des champs */
+input.form-control,
+textarea.form-control {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+input {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}

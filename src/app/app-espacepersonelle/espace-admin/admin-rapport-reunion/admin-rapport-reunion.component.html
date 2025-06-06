@@ -1,0 +1,45 @@
+<div class="container mt-4">
+  <h2>📅 Rapport de réunion</h2>
+
+  <!-- Sélecteur de date -->
+  <input
+    type="date"
+    [(ngModel)]="selectedDate"
+    (change)="onDateChange($event)"
+    class="form-control mb-3"
+  />
+
+  <div *ngIf="selectedDate">
+    <h4>Rapport du {{ selectedDate | date: 'fullDate' }}</h4>
+
+    <!-- Directrice : champ pour saisir le rapport -->
+    <textarea
+      class="form-control mb-2"
+      [(ngModel)]="rapport"
+      [readonly]="!isDirectrice"
+      rows="10"
+    ></textarea>
+
+    <!-- Label pour indiquer si le rapport est modifiable -->
+    <div *ngIf="isDirectrice" class="mb-2">
+      <label class="text-info" for="rapport">Modification autorisée : </label>
+      <span *ngIf="rapportDateUpdate">Dernière modification : {{ rapportDateUpdate | date: 'short' }}</span>
+    </div>
+
+    <!-- Liste des utilisateurs qui ont vu le rapport -->
+    <div *ngIf="hasUtilisateursVus()" class="mt-3">
+      <p class="mt-2">
+        <strong>Vues par :</strong>
+        <span *ngFor="let user of utilisateursVus; let i = index">
+          {{ user }}<span *ngIf="i < utilisateursVus.length - 1">, </span>
+        </span>
+      </p>
+    </div>
+
+
+    <!-- Bouton pour la directrice uniquement -->
+    <button *ngIf="isDirectrice" class="btn btn-primary" (click)="saveRapport()">
+      Enregistrer
+    </button>
+  </div>
+</div>

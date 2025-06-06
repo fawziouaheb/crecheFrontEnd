@@ -1,0 +1,92 @@
+<div class="w-100 h-100">
+  <div class="row m-0">
+    <div
+      class="col p-0 d-flex justify-content-center align-items-center position-relative"
+    >
+      <img
+        src="../../assets/resources/page-accueil-enfant.jpg"
+        alt="Créche mini"
+        class="img-fluid w-100 h-100 object-fit-cover"
+      />
+      <p
+        class="fs-3 fw-bold text-center text-light position-absolute m-3 bg-secondary bg-opacity-25 rounded-3 ps-2 pe-2"
+        [textContent]="motifCreche"
+      ></p>
+    </div>
+  </div>
+
+  <div class="row m-0 d-flex justify-content-center pt-4">
+    <div class="w-75 mt-4">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 d-flex flex-column">
+            <!-- Colonne à gauche -->
+            <div class="row d-flex">
+              <div class="col-md-6 d-flex align-items-stretch mt-3">
+                <app-button-card
+                  titre="Tout sur nos crèches"
+                  corps="Projet éducatif, ateliers d'éveil, encadrement,
+                    alimentation, sécurité"
+                  bgColor="bg-custom-1"
+                  [allerVers]="routes.SOMMAIRE_CRECHE"
+                ></app-button-card>
+              </div>
+              <div class="col-md-6 d-flex align-items-stretch mt-3">
+                <app-button-card
+                  titre="Tarif de votre place en crèche"
+                  bgColor="bg-custom-2"
+                  [allerVers]="routes.TARIF"
+                  class="d-flex"
+                ></app-button-card>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 d-flex align-items-stretch mt-3">
+                <app-button-card
+                  titre="Aide & FAQ parents"
+                  bgColor="bg-custom-3"
+                  class="d-flex w-100 h-100"
+                ></app-button-card>
+              </div>
+              <div class="col-md-6 d-flex align-items-stretch mt-3">
+                <app-button-card
+                  titre="Notre réseau de crèches"
+                  bgColor="bg-custom-4"
+                ></app-button-card>
+              </div>
+            </div>
+          </div>
+
+          <!-- Colonne à droite -->
+          <div class="col-md-4 d-flex mt-3">
+            <app-button-card
+              titre="Avis de parents"
+              corps="Témoignages de nos familles"
+              bgColor="bg-custom-5"
+              [allerVers]="routes.AVIS_PARENTS"
+              class="d-flex w-100"
+            ></app-button-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 3e ligne les crèches avec l'adress -->
+  <div class="row mb-4 mx-4 p-5">
+    <div
+      *ngFor="let creche of CRECHE_DATA"
+      class="col-md-6 d-flex align-items-end mt-3 position-relative justify-content-center"
+    >
+      <img
+        [src]="creche.image"
+        alt="Créche mini"
+        class="img-fluid w-100 h-100 object-fit-cover"
+      />
+      <p
+        class="fw-bold text-center text-primary position-absolute m-3 bg-secondary bg-opacity-75 rounded-3 ps-2 pe-2 w-75 fs-6 fs-md-5"
+        [textContent]="creche.adresse"
+      ></p>
+    </div>
+  </div>
+</div>

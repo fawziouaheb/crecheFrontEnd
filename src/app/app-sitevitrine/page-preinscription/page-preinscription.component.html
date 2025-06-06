@@ -1,0 +1,464 @@
+<div
+  class="container my-5"
+  [ngClass]="{ 'form-active': preInscriptionForm.touched }"
+>
+  <h1 class="mb-4 fw-bold text-primary">
+    Pré-inscription formulaire {{ currentStep }}/3
+  </h1>
+
+  <form [formGroup]="preInscriptionForm" (ngSubmit)="onSubmit()">
+    <!-- ÉTAPE 1 -->
+    <div *ngIf="currentStep === 1">
+      <div class="card p-4">
+        <h3 class="mb-4 pb-4">Informations sur l’enfant</h3>
+
+        <div class="form-group d-flex align-items-center gap-2 mb-3 pb-4 mb-4">
+          <label for="enfantNee" class="mb-0">L'enfant est-il né ?</label>
+          <input
+            type="checkbox"
+            id="enfantNee"
+            class="custom-checkbox"
+            formControlName="enfantNee"
+          />
+        </div>
+
+        <div class="row">
+          <div class="col-md-5">
+            <app-input-field
+              label="Prénom"
+              controlName="firstName"
+              type="text"
+            />
+          </div>
+          <div class="col-md-5">
+            <app-input-field label="Nom" controlName="lastName" type="text" />
+          </div>
+          <div class="col-md-2">
+            <app-select-field
+              label="Sexe"
+              controlName="sexe"
+              [options]="sexeOptions"
+            />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4">
+            @if (preInscriptionForm.controls['enfantNee'].value) {
+            <app-input-field
+              label="Date de naissance"
+              controlName="dateNaissance"
+              type="date"
+            />
+            } @else {
+            <app-input-field
+              label="Date de naissance prévue"
+              controlName="dateNaissancePrevue"
+              type="date"
+            />
+            }
+          </div>
+          <div class="col-md-4">
+            <app-input-field
+              label="Date d'entrée au micro-crèche"
+              controlName="datePrevueEntreeCreche"
+              type="date"
+            />
+          </div>
+          <div class="col-md-4">
+            <app-select-field
+              label="Quelle structure préféréz-vous ?"
+              controlName="structureName"
+              [options]="(structuresOptions$ | async) ?? []"
+            ></app-select-field>
+          </div>
+        </div>
+
+        <div
+          class="text-info-box mt-3 p-3 border rounded text-center d-flex justify-content-center align-items-center"
+          style="min-height: 75px; background-color: #f8f9fa"
+        >
+          Merci de remplir soigneusement les informations ci-dessus. Elles nous
+          permettront d’étudier votre demande de pré-inscription avec attention.
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-end mt-3">
+        <button
+          class="btn btn-primary px-4"
+          type="button"
+          (click)="goToNextStep()"
+        >
+          Suivant
+        </button>
+      </div>
+    </div>
+
+    <!-- ÉTAPE 2 -->
+    <div *ngIf="currentStep === 2">
+      <!-- Situation familiale -->
+      <div class="card p-4 mt-4">
+        <h3 class="mb-4">Situation familiale</h3>
+        <div class="row mt-4">
+          <div class="col-md-6">
+            <app-select-field
+              label="Situation familiale"
+              controlName="situationFamille"
+              [options]="situationOptions"
+              required
+            ></app-select-field>
+          </div>
+
+          <div
+            class="col-md-6"
+            *ngIf="
+              preInscriptionForm.get('situationFamille')?.value ===
+                SituationFamilleEnum.Divorce ||
+              preInscriptionForm.get('situationFamille')?.value ===
+                SituationFamilleEnum.Separe
+            "
+          >
+            <app-select-field
+              label="Qui a la garde de l’enfant ?"
+              controlName="gardeEnfant"
+              [options]="gardeEnfantOption"
+              required
+            ></app-select-field>
+          </div>
+        </div>
+      </div>
+
+      <!-- Parents -->
+      <div class="card p-4 mt-4">
+        <h3 class="mb-4">Informations sur les parents</h3>
+
+        <div formArrayName="parents">
+          <div
+            *ngFor="let parent of parents.controls; let i = index"
+            [formGroupName]="i"
+            class="border rounded p-3 mb-3"
+          >
+            <h5 class="mb-4">Parent {{ i + 1 }}</h5>
+
+            <div class="row mt-4">
+              <div class="col-md-5">
+                <app-input-field
+                  label="Prénom"
+                  controlName="firstName"
+                  type="text"
+                  required
+                ></app-input-field>
+              </div>
+              <div class="col-md-5">
+                <app-input-field
+                  label="Nom"
+                  controlName="lastName"
+                  type="text"
+                  required
+                ></app-input-field>
+              </div>
+              <div class="col-md-2">
+                <app-input-field
+                  label="Date de naissance"
+                  controlName="dateNaissance"
+                  type="date"
+                  required
+                ></app-input-field>
+              </div>
+            </div>
+
+            <div class="row mt-3">
+              <div class="col-md-6">
+                <app-input-field
+                  label="Adresse"
+                  controlName="adresse"
+                  type="text"
+                  required
+                ></app-input-field>
+              </div>
+              <div class="col-md-6">
+                <app-input-field
+                  label="Profession"
+                  controlName="profession"
+                  type="text"
+                  required
+                ></app-input-field>
+              </div>
+            </div>
+
+            <div class="row mt-3">
+              <div class="col-md-4">
+                <app-input-field
+                  label="Téléphone"
+                  controlName="telephonePortable"
+                  type="text"
+                  required
+                ></app-input-field>
+              </div>
+              <div class="col-md-4">
+                <app-input-field
+                  label="Téléphone domicile"
+                  controlName="telephoneDomicile"
+                  type="text"
+                  required
+                ></app-input-field>
+              </div>
+              <div class="col-md-4">
+                <app-input-field
+                  label="Email"
+                  controlName="email"
+                  type="email"
+                  required
+                ></app-input-field>
+              </div>
+            </div>
+
+            <div class="text-end mt-2" *ngIf="i === 1">
+              <button
+                class="btn btn-outline-danger"
+                type="button"
+                (click)="removeParent(i)"
+              >
+                Supprimer le parent {{ i + 1 }}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-end" *ngIf="parents.length < 2">
+          <button
+            class="btn btn-outline-primary"
+            type="button"
+            (click)="addParent()"
+          >
+            Ajouter un deuxième parent
+          </button>
+        </div>
+      </div>
+
+      <!-- Frères et Sœurs -->
+      <div class="card p-4 mt-4">
+        <h3 class="mb-4">Frères et sœurs</h3>
+
+        <div formArrayName="freresSoeurs">
+          <div
+            *ngFor="let frere of freresSoeurs.controls; let i = index"
+            [formGroupName]="i"
+            class="border rounded p-3 mb-3"
+          >
+            <h5 class="mb-3">Frère/Sœur {{ i + 1 }}</h5>
+
+            <div class="row">
+              <div class="col-md-4">
+                <app-input-field
+                  label="Prénom"
+                  controlName="firstName"
+                  type="text"
+                  required
+                ></app-input-field>
+              </div>
+              <div class="col-md-4">
+                <app-input-field
+                  label="Nom"
+                  controlName="lastName"
+                  type="text"
+                  required
+                ></app-input-field>
+              </div>
+              <div class="col-md-4">
+                <app-input-field
+                  label="Date de naissance"
+                  controlName="dateNaissance"
+                  type="date"
+                  required
+                ></app-input-field>
+              </div>
+            </div>
+
+            <div class="text-end mt-2">
+              <button
+                class="btn btn-outline-danger"
+                type="button"
+                (click)="removeFrereSoeur(i)"
+              >
+                Supprimer
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-end mt-3">
+          <button
+            class="btn btn-outline-primary"
+            type="button"
+            (click)="addFrereSoeur()"
+          >
+            Ajouter un frère ou une sœur
+          </button>
+        </div>
+      </div>
+
+      <!-- Informations complémentaires -->
+      <div class="card p-4 mt-4">
+        <h3 class="mb-4">Informations complémentaires</h3>
+        <div class="row">
+          <div class="col-12">
+            <textarea
+              class="form-control"
+              formControlName="informationsComplementaires"
+              rows="4"
+              placeholder="Entrez ici les remarques, allergies, besoins particuliers..."
+            ></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-end mt-3">
+        <button
+          class="btn btn-outline-primary me-2 px-4"
+          type="button"
+          (click)="goToPreviousStep()"
+        >
+          Précédent
+        </button>
+        <button
+          class="btn btn-primary px-4"
+          type="button"
+          (click)="goToNextStep()"
+        >
+          Suivant
+        </button>
+      </div>
+    </div>
+
+    <!-- ÉTAPE 3 -->
+    <div *ngIf="currentStep === 3">
+      <div class="card p-4 mt-4">
+        <h3 class="mb-4">Renseignement de pré-inscription</h3>
+
+        <!-- 🗓️ Jours de garde -->
+        <p class="mb-3">
+          Jours de garde de l’enfant (cocher les jours souhaités) :
+        </p>
+
+        <div class="d-flex flex-wrap gap-4">
+          <div
+            class="d-flex align-items-center gap-2"
+            *ngFor="let jour of joursDisponibles"
+          >
+            <input
+              type="checkbox"
+              class="custom-checkbox"
+              [value]="jour.value"
+              [id]="jour.value"
+              (change)="onJourChange($event)"
+              [checked]="
+                preInscriptionForm.value.joursChoisis?.includes(jour.value)
+              "
+            />
+            <label [for]="jour.value" class="mb-0">{{ jour.label }}</label>
+          </div>
+        </div>
+
+        <!-- ✅ Formule adaptée à vos besoins (dans la même card) -->
+        <div class="mt-5">
+          <p class="mb-3">
+            Formule adaptée à vos besoins (cocher la case correspondant à votre
+            situation)
+          </p>
+
+          <div class="table-responsive">
+            <table class="table table-bordered text-center align-middle">
+              <thead class="table-light">
+                <tr>
+                  <th *ngFor="let formule of formulesHeures">
+                    {{ formule.label }}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td *ngFor="let formule of formulesHeures">
+                    <input
+                      type="radio"
+                      class="custom-radio"
+                      name="nombreHeuresParSemaine"
+                      [value]="formule.value"
+                      formControlName="nombreHeuresParSemaine"
+                      [id]="formule.value"
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 🕒 Horaires prévisionnels -->
+        <div class="mt-5">
+          <p class="mb-3">
+            Inscrire les heures d'arrivée et de départ prévisionnelles de
+            l'enfant :
+          </p>
+
+          <div class="table-responsive">
+            <table class="table table-bordered align-middle text-center">
+              <thead class="table-light">
+                <tr>
+                  <th>Jour</th>
+                  <th>Matin (Arrivée)</th>
+                  <th>Soir (Départ)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let jour of preInscriptionForm.value.joursChoisis">
+                  <td>{{ jour }}</td>
+                  <td>
+                    <input
+                      type="time"
+                      class="form-control"
+                      [formControl]="getHoraireControl(jour, 'heureDebut')"
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="time"
+                      class="form-control"
+                      [formControl]="getHoraireControl(jour, 'heureFin')"
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div
+          class="text-info-box mt-4 p-4 border rounded d-flex align-items-center"
+          style="min-height: 75px; background-color: #f8f9fa"
+        >
+          <i class="bi bi-info-circle-fill text-primary me-3 fs-4"></i>
+          <div class="text-start">
+            <strong>Information :</strong>
+            <span>
+              la micro-crèche est fermée 5 semaines par an (4 semaines aux
+              vacances d'été et une semaine aux vacances de fin d'année). Ces
+              semaines de congés vous seront précisées à l’inscription.
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-end mt-3">
+        <button
+          class="btn btn-outline-primary me-2 px-4"
+          type="button"
+          (click)="goToPreviousStep()"
+        >
+          Précédent
+        </button>
+        <button class="btn btn-primary px-4" type="submit">Soumettre</button>
+      </div>
+    </div>
+  </form>
+</div>

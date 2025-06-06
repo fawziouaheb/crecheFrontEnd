@@ -1,0 +1,178 @@
+<div class="container py-5">
+  <h2 class="text-center text-primary mb-4">Nos valeurs éducatives</h2>
+  <div class="row">
+    <!-- Epanouissement -->
+    <div class="col-lg-6 mb-4">
+      <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+          <h4
+            class="card-title d-flex justify-content-between align-items-center"
+          >
+            L’épanouissement
+            <button
+              class="btn btn-link text-white"
+              (click)="toggleEpanouissement()"
+            >
+              <i class="fas fa-chevron-down"></i>
+            </button>
+          </h4>
+        </div>
+        <div [ngbCollapse]="isCollapsedEpanouissement">
+          <div class="card-body">
+            <p>
+              Il est important pour les parents d’avoir confiance en l’équipe
+              pour pouvoir confier leur enfant sereinement. Le plaisir est un
+              puissant moteur dans la vie qui passe par l’envie d’aller à la
+              crèche et de jouer. L’accueil en petit effectif favorise le
+              bien-être de l’enfant et son épanouissement global. En tant que
+              professionnelles de la petite enfance, nous veillons au bien-être
+              physique, psychologique et physiologique de l’enfant. Nos
+              aménagements dans la structure sont adaptés à leur sécurité et
+              accueillant pour procurer le bien-être dont ils ont besoin.
+              <br /><br />
+              Mais il y a également le bien-être de l’équipe qui est une
+              composante primordiale de l’accueil. Nous savons que pour que
+              l’accueil soit de qualité, l’équipe doit se sentir bien au
+              quotidien. Pour se faire, trouver un épanouissement professionnel
+              est indispensable. Les agents bénéficient, par exemple, de
+              matériel ergonomique afin de protéger leur santé au travail.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Autonomie -->
+    <div class="col-lg-6 mb-4">
+      <div class="card shadow-sm">
+        <div class="card-header bg-success text-white">
+          <h4
+            class="card-title d-flex justify-content-between align-items-center"
+          >
+            L’autonomie
+            <button class="btn btn-link text-white" (click)="toggleAutonomie()">
+              <i class="fas fa-chevron-down"></i>
+            </button>
+          </h4>
+        </div>
+        <div [ngbCollapse]="isCollapsedAutonomie">
+          <div class="card-body">
+            <p>
+              Il est important pour les parents que les professionnels laissent
+              libre choix des activités et des jeux pour permettre à l'enfant de
+              découvrir par lui-même un environnement adapté à ses capacités.
+              <br /><br />
+              La confiance que nous accordons aux enfants, les encouragements et
+              la valorisation de leur personne permettent à celui-ci de prendre
+              conscience de leurs capacités et de leurs limites. Ils développent
+              leur estime en soi et favorisent leur autonomie.
+              <br /><br />
+              L’autonomie se développe petit à petit et permet à l’enfant de se
+              débrouiller au quotidien et de pouvoir prendre ses propres
+              décisions. Chaque enfant est différent et peut développer son
+              autonomie plus rapidement dans un domaine que dans un autre. Nous
+              les laissons faire des choix et leur confions des tâches qui
+              représentent de bonnes façons pour les aider à acquérir de
+              l’autonomie.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bienveillance -->
+    <div class="col-lg-6 mb-4">
+      <div class="card shadow-sm">
+        <div class="card-header bg-warning text-white">
+          <h4
+            class="card-title d-flex justify-content-between align-items-center"
+          >
+            La bienveillance
+            <button
+              class="btn btn-link text-white"
+              (click)="toggleBienveillance()"
+            >
+              <i class="fas fa-chevron-down"></i>
+            </button>
+          </h4>
+        </div>
+        <div [ngbCollapse]="isCollapsedBienveillance">
+          <div class="card-body">
+            <p>
+              Il est important pour les parents d’entretenir une communication
+              transparente, respectueuse et sans jugement avec les
+              professionnels. Que l’enfant soit considéré comme une personne à
+              part entière et placé au cœur des préoccupations de l’équipe. Que
+              son rythme et son développement soit pris en compte et que sa
+              sécurité soit assurée au quotidien. La posture bienveillante de
+              l’équipe permet cela.
+              <br /><br />
+              Afin de combattre les préjugés et les stéréotypes liés au genre
+              dans et par l'éducation, nous n’utilisons pas de signalétique rose
+              ou bleu (étiquette manteaux et sacs). Les professionnels
+              participent à des analyses de pratiques dans le but de faire
+              évoluer les représentations. Nous essayons de trouver la parole
+              juste et égalitaire (par exemple complimenter les petits garçons
+              sur leur tenue autant que les filles). L’équipe bannit les livres
+              stéréotypant et soigne la sélection de jouets en veillant aux
+              représentations et messages induits. Nous proposons aux filles et
+              aux garçons les mêmes jeux (caisse de voiture, poupées, jeux
+              d’extérieur…).
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Coéducation -->
+    <div class="col-lg-6 mb-4">
+      <div class="card shadow-sm">
+        <div class="card-header bg-info text-white">
+          <h4
+            class="card-title d-flex justify-content-between align-items-center"
+          >
+            La coéducation
+            <button
+              class="btn btn-link text-white"
+              (click)="toggleCoeeducation()"
+            >
+              <i class="fas fa-chevron-down"></i>
+            </button>
+          </h4>
+        </div>
+        <div [ngbCollapse]="isCollapsedCoeeducation">
+          <div class="card-body">
+            <p>
+              C’est une collaboration entre les parents et les professionnels
+              qui est essentielle pour préserver ce lien de confiance entretenu
+              avec les familles. C’est une relation qui a pour objectif
+              d’harmoniser nos pratiques entre la famille et les professionnels
+              pour le bien-être et le développement de l’enfant.
+              <br /><br />
+              La coéducation demande de reconnaître la place du parent,
+              d’encourager son implication auprès de son enfant ainsi que de
+              l’associer aux actions éducatives en lien avec la structure. La
+              crèche doit pouvoir être une continuité de la famille et
+              réciproquement pour permettre à l’enfant de se développer en
+              harmonie avec son environnement.
+              <br /><br />
+              Nous veillons à conserver et valoriser la place des parents et les
+              reconnaissons comme premiers éducateurs de leurs enfants. Nous
+              privilégions les rencontres entre parents et professionnels, ainsi
+              que les temps conviviaux.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- la période de familiarisation -->
+<app-page-familiarization-periode></app-page-familiarization-periode>
+
+<!--  Les échange du quotidient -->
+<app-page-daily-exchange></app-page-daily-exchange>
+
+<!-- La section soins-->
+<app-page-care></app-page-care>

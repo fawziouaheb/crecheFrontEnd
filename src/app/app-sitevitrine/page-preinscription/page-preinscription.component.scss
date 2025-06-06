@@ -1,0 +1,88 @@
+.custom-checkbox {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #8EACCD;
+  border-radius: 5px;
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  cursor: pointer;
+  background-color: #fff;
+  position: relative;
+
+  &:checked {
+    background-color: #8EACCD;
+    border-color: #8EACCD;
+  }
+
+  &:checked::after {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 1px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+}
+
+.custom-radio {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #8EACCD;
+  border-radius: 50%;
+  /* ⭕ rond */
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  cursor: pointer;
+  background-color: #fff;
+  position: relative;
+  display: inline-block;
+  transition: all 0.2s ease-in-out;
+}
+
+.custom-radio:checked {
+  background-color: #8EACCD;
+  border-color: #8EACCD;
+}
+
+.custom-radio:checked::after {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 6px;
+  height: 6px;
+  background-color: white;
+  border-radius: 50%;
+}
+
+/* ✅ Texte info aligné */
+.text-info-box {
+  border: 1px solid #ccc;
+  background-color: transparent;
+  color: #444;
+  font-size: 0.9rem;
+  min-height: 75px;
+}
+
+/* ✅ Bouton flottant (optionnel) */
+.floating-submit-btn {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 1000;
+  border-radius: 12px;
+  padding: 0.75rem 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.card:hover {
+  border: 2px solid #8EACCD;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(142, 172, 205, 0.2);
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}

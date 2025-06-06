@@ -1,0 +1,128 @@
+/* Styles pour les cartes */
+.card {
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Styles pour le carrousel */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  padding: 10px;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  width: 5%;
+}
+
+/* Styles pour les boutons */
+.btn-warning, .btn-danger {
+  margin: 5px;
+}
+
+/* structure.component.css */
+.leaflet-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #f8f9fa;
+  z-index: 1;
+}
+
+.leaflet-map-container {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
+}
+
+
+
+
+
+/* Style global de la barre de recherche */
+.leaflet-bar.leaflet-control {
+  background-color: #ffffff; /* Fond blanc pour la barre */
+  border-radius: 50px; /* Bordures arrondies */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Ombre légère pour donner un effet de profondeur */
+  padding: 8px 20px; /* Padding intérieur pour donner de l'espace */
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Input de la barre de recherche */
+.leaflet-bar .leaflet-control-geocoder input {
+  padding: 12px 20px;
+  font-size: 16px;
+  width: 300px; /* Largeur de l'input */
+  border: 2px solid #ddd; /* Bordure douce */
+  border-radius: 25px; /* Coins arrondis */
+  background-color: #f7f7f7; /* Fond gris clair pour le champ */
+  transition: all 0.3s ease; /* Transition fluide pour l'effet de focus */
+  outline: none; /* Retirer l'outline par défaut */
+}
+
+/* Changer l'apparence de l'input lorsqu'il est focalisé */
+.leaflet-bar .leaflet-control-geocoder input:focus {
+  border-color: #4CAF50; /* Bordure verte */
+  background-color: #ffffff; /* Fond blanc quand focus */
+  box-shadow: 0 0 10px rgba(76, 175, 80, 0.2); /* Ombre verte au focus */
+}
+
+/* Styles pour l'icône de recherche */
+.leaflet-bar .leaflet-control-geocoder .leaflet-control-geocoder-icon {
+  background-color: #4CAF50; /* Fond vert */
+  color: #fff; /* Texte blanc */
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Transition de la couleur au survol */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Effet au survol de l'icône de recherche */
+.leaflet-bar .leaflet-control-geocoder .leaflet-control-geocoder-icon:hover {
+  background-color: #45a049; /* Teinte plus foncée au survol */
+}
+
+/* Résultats de recherche */
+.leaflet-bar .leaflet-control-geocoder-results {
+  background-color: #ffffff;
+  border-radius: 8px;
+  max-height: 200px;
+  overflow-y: auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Ombre douce autour des résultats */
+  margin-top: 5px;
+}
+
+/* Chaque résultat de recherche */
+.leaflet-bar .leaflet-control-geocoder-result {
+  padding: 12px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #333;
+  transition: background-color 0.3s ease; /* Transition pour le survol */
+}
+
+/* Effet au survol des résultats */
+.leaflet-bar .leaflet-control-geocoder-result:hover {
+  background-color: #f1f1f1;
+}
+
+/* Icône de recherche dans le champ */
+.leaflet-bar .leaflet-control-geocoder-icon svg {
+  width: 18px;
+  height: 18px;
+  fill: white;
+}
+

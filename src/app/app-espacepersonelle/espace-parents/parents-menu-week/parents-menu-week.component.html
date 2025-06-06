@@ -1,0 +1,69 @@
+<div class="menu-container">
+  <h2>Menu de la semaine</h2>
+
+  <form (ngSubmit)="onSubmit()" #menuForm="ngForm">
+    <div class="form-group">
+      <label for="title">Titre du menu</label>
+      <input
+        type="text"
+        id="title"
+        name="title"
+        class="form-control"
+        [(ngModel)]="title"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="image">Ajouter un nouveau menu (image)</label>
+      <input
+        type="file"
+        (change)="onFileSelected($event)"
+        accept="image/*"
+        class="form-control"
+      />
+    </div>
+
+    <div *ngIf="imagePreview" class="image-preview">
+      <h4>Aperçu :</h4>
+      <img [src]="imagePreview" class="preview-img" />
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="!selectedFile">
+      Publier
+    </button>
+  </form>
+
+  <hr />
+
+  <div *ngIf="menus.length > 0">
+    <h3>Menus enregistrés</h3>
+    <div class="gallery">
+      <div *ngFor="let menu of menus" class="menu-thumb">
+        <h5>{{ menu.title }}</h5>
+        <!-- Afficher l'image -->
+        <img
+          *ngIf="menu.image"
+          [src]="'data:image/png;base64,' + menu.image"
+          alt="{{ menu.title }}"
+          class="preview-img"
+          (click)="openImage(menu.image)"
+        />
+        <p>Créé le {{ menu.createdAt | date }}</p>
+        <button (click)="deleteMenu(menu.id)" class="btn btn-danger">
+          Supprimer
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modale pour afficher l'image agrandie -->
+  <div *ngIf="isModalOpen" class="modal" (click)="closeModal()">
+    <div class="modal-content">
+      <img
+        [src]="'data:image/png;base64,' + selectedImage"
+        class="modal-image"
+      />
+    </div>
+  </div>
+</div>

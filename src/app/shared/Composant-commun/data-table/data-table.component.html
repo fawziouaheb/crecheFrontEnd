@@ -1,0 +1,40 @@
+<div class="table-responsive">
+  <table
+    class="table table-bordered shadow-sm"
+    style="background-color: #fff3e0"
+  >
+    <thead class="thead-light" style="background-color: #8eaccd; color: white">
+      <tr>
+        <th *ngFor="let col of columns">{{ col }}</th>
+        <th class="text-center">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of data">
+        <td *ngFor="let key of keys" class="primary-color">
+          {{ getNestedValue(row, key) }}
+        </td>
+        <td class="text-center">
+          <button
+            class="btn btn-sm btn-outline-primary me-1"
+            (click)="onView(row)"
+          >
+            👁️
+          </button>
+          <button
+            class="btn btn-sm btn-outline-danger me-1"
+            (click)="onDelete(row)"
+          >
+            🗑️
+          </button>
+          <button
+            class="btn btn-sm btn-outline-success"
+            (click)="onAccept(row)"
+          >
+            ✅
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

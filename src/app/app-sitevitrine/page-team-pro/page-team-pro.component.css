@@ -1,0 +1,33 @@
+.team-card {
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+  background: #fff;
+}
+
+.team-card:hover {
+  transform: scale(1.05);
+}
+
+.icon {
+  font-size: 50px;
+  color: #ff6f61;
+  /* Rouge fluo */
+  margin-bottom: 15px;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.card-text {
+  color: #666;
+}
+
+.team-footer {
+  font-size: 1.1rem;
+  font-weight: bold;
+  max-width: 800px;
+  margin: 0 auto;
+}

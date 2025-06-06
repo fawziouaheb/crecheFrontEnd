@@ -1,0 +1,47 @@
+.soins-section {
+  background: #FFDDC1;
+  /* Fond doux */
+  padding: 40px 20px;
+  border-radius: 20px;
+}
+
+.section-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #D64550;
+  /* Rouge doux */
+  margin-bottom: 20px;
+}
+
+.accordion-button {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.accordion-item {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.sub-section {
+  margin-top: 10px;
+  padding-left: 15px;
+  border-left: 3px solid #D64550;
+}
+
+
+
+
+/* Styles personnalisés pour les cartes */
+.card {
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.icon {
+  border-radius: 50%;
+  padding: 15px;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto;
+}

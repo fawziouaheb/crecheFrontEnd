@@ -1,0 +1,42 @@
+<div class="w-100 h-100 d-flex align-items-center justify-content-center">
+  <div class="container text-center">
+    <!-- Titre responsive -->
+    <div class="mb-4">
+      <app-app-titre titre="Mon espace"></app-app-titre>
+    </div>
+    <!-- Formulaire de connexion -->
+    <form
+      [formGroup]="loginForm"
+      (ngSubmit)="onSubmit()"
+      class="w-100 mx-auto"
+      style="max-width: 350px"
+    >
+      <div class="mb-3 text-start">
+        <app-input-text-with-error
+          inputType="email"
+          label="Courriel"
+          [control]="loginForm.get('email')!"
+        ></app-input-text-with-error>
+      </div>
+      <div class="mb-3 text-start">
+        <app-input-text-with-error
+          inputType="password"
+          [label]="'Mot de passe'"
+          [control]="loginForm.get('password')!"
+        ></app-input-text-with-error>
+      </div>
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <a href="/forget-password" class="text-decoration-none small"
+          >Mot de passe oublié ?</a
+        >
+      </div>
+      <button
+        type="submit"
+        class="btn btn-primary w-100 text-white"
+        [disabled]="!loginForm.valid"
+      >
+        Se connecter
+      </button>
+    </form>
+  </div>
+</div>

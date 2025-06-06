@@ -1,0 +1,24 @@
+<div class="container py-3">
+  <h2 class="mb-4 text-primary">Liste des préinscriptions</h2>
+
+  <ng-container *ngIf="preinscriptions$ | async as preinscriptions">
+    <app-data-table
+      [columns]="columns"
+      [keys]="keys"
+      [data]="preinscriptions"
+      (view)="onView($event)"
+      (delete)="onDelete($event)"
+      (accept)="onAccept($event)"
+    ></app-data-table>
+
+    <div *ngIf="preinscriptions.length === 0" class="alert alert-info mt-3">
+      Aucune préinscription pour cette structure.
+    </div>
+  </ng-container>
+
+  <div *ngIf="!(structure$ | async)">
+    <p class="text-muted">
+      Veuillez sélectionner une structure pour voir les préinscriptions.
+    </p>
+  </div>
+</div>

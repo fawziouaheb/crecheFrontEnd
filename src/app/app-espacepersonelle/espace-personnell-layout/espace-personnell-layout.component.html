@@ -1,0 +1,76 @@
+<!-- HEADER / NAVBAR -->
+<div
+  class="d-flex flex-wrap align-items-center bg-primary px-3 py-2 text-white"
+  style="gap: 0.5rem"
+>
+  <!-- Sidebar (PrimeNG) -->
+  <p-sidebar
+    [(visible)]="sidebarVisible"
+    class="my-sidebar"
+    [modal]="false"
+    position="left"
+    [baseZIndex]="1000"
+    [showCloseIcon]="true"
+  >
+    <h3 class="text-white mb-4">Espace utilisateur</h3>
+
+    <ul class="menu-list">
+      <li
+        *ngFor="let item of menuItems"
+        class="menu-item"
+        [class.selected]="item.selected"
+        (click)="selectMenuItem(item)"
+        (mouseenter)="item.hovered = true"
+        (mouseleave)="item.hovered = false"
+      >
+        <a class="menu-link d-flex align-items-center gap-2">
+          <span>{{ item.name }}</span>
+        </a>
+      </li>
+    </ul>
+  </p-sidebar>
+
+  <!-- Bouton sidebar -->
+  <p-button
+    icon="pi pi-bars"
+    class="my-button me-2"
+    (onClick)="sidebarVisible = true"
+  />
+
+  <!-- Dropdown crèche -->
+  <div
+    class="dropdown me-2"
+    style="width: 160px"
+    *ngIf="isDropdownVisible && items.length > 0"
+  >
+    <button
+      class="btn btn-primary border-white dropdown-toggle w-100 d-flex align-items-center justify-content-between text-white"
+      type="button"
+      id="dropdownMenuButton"
+      data-bs-toggle="dropdown"
+      aria-expanded="false"
+      [title]="value || 'Sélectionner une crèche'"
+    >
+      <span class="text-start pe-3">{{
+        value || "Sélectionner une crèche"
+      }}</span>
+    </button>
+
+    <ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">
+      <li *ngFor="let item of items">
+        <a class="dropdown-item" href="#" (click)="setValue($event, item)">
+          {{ item }}
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Flex-grow pour pousser les éléments suivants à droite -->
+  <div class="flex-grow-1"></div>
+
+  <!-- Nom utilisateur -->
+  <span class="me-2">{{ username }}</span>
+
+  <!-- Bouton logout -->
+  <p-button icon="pi pi-sign-out" class="my-button" (onClick)="logout()" />
+</div>

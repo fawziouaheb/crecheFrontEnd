@@ -1,0 +1,84 @@
+/* employee-form.component.css */
+
+/* Fond pastel pour le conteneur */
+.container {
+  background-color: #f9f9f9;
+  /* Couleur de fond très douce */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Titre en couleur pastel */
+h2 {
+  color: #FF8C9D;
+  /* Rose pastel */
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+}
+
+/* Champ de texte avec bordure douce et effet focus */
+.form-group label {
+  font-weight: bold;
+  color: #6B7B8C;
+  /* Gris léger */
+  font-size: 16px;
+}
+
+.form-control {
+  border-radius: 8px;
+  border: 1px solid #E0E0E0;
+  /* Bordure douce */
+  padding: 10px;
+  font-size: 14px;
+  margin-bottom: 15px;
+  transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #FF8C9D;
+  /* Rose pastel pour le focus */
+  outline: none;
+}
+
+/* Bouton avec un effet de couleur pastel */
+.btn-primary {
+  background-color: #FF8C9D;
+  /* Rose pastel */
+  border: none;
+  color: white;
+  font-size: 16px;
+  padding: 12px 20px;
+  border-radius: 50px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #FF6B8A;
+  /* Rose un peu plus foncé */
+}
+
+/* Style pour les éléments de sélection */
+select.form-control {
+  background-color: #FFEBF2;
+  /* Fond pastel pour le select */
+  border: 1px solid #FFB6C1;
+  /* Bordure pastel rose clair */
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 8px;
+}
+
+/* Cacher la bordure du bouton pour plus de douceur */
+button[type="submit"]:disabled {
+  background-color: #E0A0B0;
+  /* Gris doux quand désactivé */
+  cursor: not-allowed;
+}
+
+/* Textes des placeholders */
+input::placeholder {
+  color: #B3B3B3;
+  /* Couleur de texte pastel pour le placeholder */
+}

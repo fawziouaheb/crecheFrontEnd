@@ -1,0 +1,13 @@
+<div class="container mt-5">
+  <h2 class="text-center text-primary mb-4">📜 Règlements et Protocoles</h2>
+
+  <!-- Affichage dynamique des protocoles -->
+  <section *ngFor="let protocole of protocoles">
+    <h3 class="text-secondary">{{ protocole.titre }}</h3>
+
+    <!-- Contenu général du protocole -->
+    <div *ngIf="protocole.contenu">
+      <p [innerHTML]="convertToHtml(protocole.contenu)"></p>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,118 @@
+<div class="container my-5">
+    <h2 class="text-center mb-4" style="font-family: 'Comic Sans MS', cursive; color: #FF6F61;">
+      Dossier de l'Employé
+    </h2>
+  
+    <div class="row">
+      <!-- Informations Employé -->
+      <div class="col-md-6">
+        <div class="card mb-4 shadow-sm">
+          <div class="card-header bg-primary text-white">
+            <i class="fas fa-user-tie"></i> Informations de l'Employé
+          </div>
+          <div class="card-body">
+            <div class="mb-2"><i class="fas fa-user"></i> <strong>Nom :</strong> {{ employee?.firstName }} {{ employee?.lastName }}</div>
+            <div class="mb-2"><i class="fas fa-birthday-cake"></i> <strong>Date de naissance :</strong> {{ employee?.dateBirth | date: 'dd/MM/yyyy' }}</div>
+            <div class="mb-2"><i class="fas fa-envelope"></i> <strong>Email :</strong> {{ employee?.email }}</div>
+            <div class="mb-2"><i class="fas fa-phone"></i> <strong>Téléphone :</strong> {{ employee?.mobile }}</div>
+            <div class="mb-2">
+              <i class="fas fa-id-card"></i> <strong>Statut :</strong> 
+              <span [class.text-success]="employee?.status === 'Activé'" [class.text-danger]="employee?.status !== 'Activé'">
+                {{ employee?.statut }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Informations Contrat -->
+      <div class="col-md-6">
+        <div class="card mb-4 shadow-sm">
+          <div class="card-header bg-success text-white">
+            <i class="fas fa-file-contract"></i> Informations du Contrat
+          </div>
+          <div class="card-body">
+            <div class="mb-2"><i class="fas fa-building"></i> <strong>Structure :</strong> {{ employee?.structureName || 'Non défini' }}</div>
+            <div class="mb-2"><i class="fas fa-briefcase"></i> <strong>Type de Contrat :</strong> {{ employee?.typeContratct }}</div>
+            <div class="mb-2"><i class="fas fa-calendar-alt"></i> <strong>Début du Contrat :</strong> {{ employee?.dateBeginContract }}</div>
+            <div class="mb-2"><i class="fas fa-calendar-alt"></i> <strong>Fin du Contrat :</strong> {{ employee?.dateEndContract || 'Non défini' }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+
+  
+    <div class="mt-4">
+      <label for="fileUpload" class="form-label">Ajouter un fichier PDF au dossier de employé :</label>
+      <input type="file" id="fileUpload" (change)="onFileSelected($event)" accept="application/pdf" class="form-control">
+      <button class="btn btn-primary mt-2" (click)="uploadFile()">Téléverser</button>
+    </div>
+  
+    <!-- Liste des documents du employé -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-info text-white">
+        <i class="fas fa-file-alt"></i> Documents de employé
+      </div>
+      <div class="card-body">
+        <ul class="list-group">
+          <li *ngFor="let file of employee?.files" class="list-group-item d-flex justify-content-between align-items-center">
+            <span><i class="fas fa-file-pdf text-danger"></i> {{ file.fileName }}</span>
+            
+            <div>
+              <button class="btn btn-sm btn-success me-2" (click)="downloadFile(file.fileName)">
+                <i class="fas fa-download"></i>
+              </button>
+              
+              <button class="btn btn-sm btn-danger" (click)="deleteFile(file.fileName)">
+                <i class="fas fa-trash-alt"></i>
+              </button>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+      <!-- Section Nombre d'heures travaillées -->
+    <div class="card shadow-sm p-4 mt-5">
+        <h3 class="text-center mb-4">Consulter les Heures de Travail</h3>
+      
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label for="mois" class="form-label">Mois :</label>
+            <select id="mois" class="form-select" [(ngModel)]="mois" (change)="mettreAJourDates()">
+              <option *ngFor="let m of moisListe" [value]="m.value">{{ m.label }}</option>
+            </select>
+          </div>
+      
+          <div class="col-md-6">
+            <label for="annee" class="form-label">Année :</label>
+            <select id="annee" class="form-select" [(ngModel)]="annee" (change)="mettreAJourDates()">
+              <option *ngFor="let a of anneesDisponibles" [value]="a">{{ a }}</option>
+            </select>
+          </div>
+        </div>
+      
+        <div class="mt-4 text-center">
+          <button class="btn btn-primary" (click)="chercherSessions()">Voir les Heures</button>
+        </div>
+      
+        <div *ngIf="totalHeures > 0" class="mt-4">
+          <h4>Total des Heures : {{ totalHeures | number:'1.2-2' }} h</h4>
+          <button class="btn btn-link" (click)="afficherDetails = !afficherDetails">
+            {{ afficherDetails ? 'Cacher' : 'Voir' }} les Détails
+          </button>
+      
+          <div *ngIf="afficherDetails">
+            <ul class="list-group mt-3">
+              <li *ngFor="let session of detailsSessions" class="list-group-item d-flex justify-content-between">
+                <span>{{ session.dateSession }} | {{ session.arrivalTime }} - {{ session.departureTime }}</span>
+                <span>{{ session.durationMinute }} min</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+    </div>
+      
+  </div>
+  

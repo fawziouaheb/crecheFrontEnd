@@ -1,0 +1,12 @@
+<div class="d-flex flex-column vh-100">
+  <div class="sticky-top">
+    <app-espace-personnell-layout
+      [username]="username$ | async"
+      [menuItems]="(menuItems$ | async) ?? []"
+    >
+    </app-espace-personnell-layout>
+  </div>
+  <div class="flex-grow-1">
+    <router-outlet></router-outlet>
+  </div>
+</div>

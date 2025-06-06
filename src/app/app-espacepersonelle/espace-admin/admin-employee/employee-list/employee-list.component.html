@@ -1,0 +1,88 @@
+<div class="container">
+  <h2
+    class="text-center mb-4"
+    style="font-family: 'Comic Sans MS', cursive; color: #ff6f61"
+  >
+    Liste des Employés
+  </h2>
+
+  <div class="d-flex justify-content-end mb-4">
+    <button
+      (click)="addEmployee()"
+      class="btn btn-primary"
+      style="background-color: #ff6f61; border-color: #ffb74d; color: white"
+    >
+      Ajouter un Employé
+    </button>
+  </div>
+  <!-- Tableau responsive -->
+  <div class="table-responsive">
+    <table class="table table-bordered" style="background-color: #fff3e0">
+      <thead
+        class="thead-light"
+        style="background-color: #ffeb3b; color: #4caf50"
+      >
+        <tr>
+          <th>#</th>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Email</th>
+          <th>Mobile</th>
+          <th>Type de Contrat</th>
+
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let employee of employees; let i = index">
+          <td class="primary-color">{{ i + 1 }}</td>
+          <td class="primary-color">{{ employee.lastName }}</td>
+          <td class="primary-color">{{ employee.firstName }}</td>
+          <td class="primary-color">{{ employee.email }}</td>
+          <td class="primary-color">{{ employee.mobile }}</td>
+          <td class="primary-color">{{ employee.typeContratct }}</td>
+          <td>
+            <button
+            (click)="viewEmployeDetails(employee.id)"
+            class="btn btn-info btn-sm"
+            style="background-color: #4caf50; border-color: #388e3c; color: white"
+            >
+              Détails
+            </button>
+            <button
+              (click)="editEmployee(employee.id)"
+              class="btn btn-warning btn-sm"
+              style="
+                background-color: #ffeb3b;
+                border-color: #ffb74d;
+                color: #4caf50;
+              "
+            >
+              Modifier
+            </button>
+            <button
+              (click)="deleteEmployee(employee.id)"
+              class="btn btn-danger btn-sm"
+              style="
+                background-color: #ff8a65;
+                border-color: #ff7043;
+                color: white;
+              "
+            >
+              Supprimer
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Si la liste est vide, afficher un message doux -->
+  <div
+    *ngIf="employees.length === 0"
+    class="alert alert-info"
+    style="background-color: #ffeb3b; color: #4caf50"
+  >
+    Aucun employé trouvé. Ajoutez-en un !
+  </div>
+</div>

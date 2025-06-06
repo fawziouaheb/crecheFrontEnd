@@ -1,0 +1,80 @@
+<div class="container mt-5">
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h4 class="card-title text-center mb-4">Notifier un Paiement</h4>
+
+      <form (ngSubmit)="envoyerNotificationPaiement()">
+        <!-- Choix du Mois -->
+        <div class="mb-3">
+          <label for="mois" class="form-label">Mois payé :</label>
+          <select
+            id="mois"
+            class="form-select"
+            [(ngModel)]="moisPaye"
+            name="moisPaye"
+            required
+          >
+            <option *ngFor="let mois of listeMois" [value]="mois.value">
+              {{ mois.label }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Choix de l'Année -->
+        <div class="mb-3">
+          <label for="annee" class="form-label">Année :</label>
+          <select
+            id="annee"
+            class="form-select"
+            [(ngModel)]="anneePaye"
+            name="anneePaye"
+            required
+          >
+            <option *ngFor="let annee of anneesDisponibles" [value]="annee">
+              {{ annee }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Montant du Paiement -->
+        <div class="mb-3">
+          <label for="montant" class="form-label">Montant (€) :</label>
+          <input
+            type="number"
+            id="montant"
+            class="form-control"
+            [(ngModel)]="montant"
+            name="montant"
+            required
+            min="0"
+          />
+        </div>
+
+        <!-- Date de Virement -->
+        <div class="mb-3">
+          <label for="dateVirement" class="form-label"
+            >Date du virement :</label
+          >
+          <input
+            type="date"
+            id="dateVirement"
+            class="form-control"
+            [(ngModel)]="dateVirement"
+            name="dateVirement"
+            required
+          />
+        </div>
+
+        <div class="d-grid gap-2">
+          <button type="submit" class="btn btn-primary">
+            Notifier le Paiement
+          </button>
+        </div>
+      </form>
+
+      <div *ngIf="messageSuccess" class="alert alert-success mt-3 text-center">
+        {{ messageSuccess }}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,261 @@
+<div class="container py-4" *ngIf="preinscription">
+  <h2 class="mb-4 text-primary">
+    Détail de la pré-inscription :
+    {{ preinscription.firstName }} {{ preinscription.lastName }}
+  </h2>
+
+  <div class="accordion" id="preinscriptionAccordion">
+    <!-- Infos de l'enfant -->
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingEnfant">
+        <button
+          class="accordion-button"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapseEnfant"
+          aria-expanded="true"
+          aria-controls="collapseEnfant"
+        >
+          <i class="bi bi-person-bounding-box me-2 small-icon"></i> Informations
+          sur l’enfant
+        </button>
+      </h2>
+      <div
+        id="collapseEnfant"
+        class="accordion-collapse collapse show"
+        aria-labelledby="headingEnfant"
+        data-bs-parent="#preinscriptionAccordion"
+      >
+        <div class="accordion-body">
+          <p>
+            <strong>Sexe :</strong> {{ preinscription.sexe || "Non renseigné" }}
+          </p>
+          <p *ngIf="preinscription.enfantNee">
+            <strong>Date de naissance :</strong>
+            {{ preinscription.dateNaissance | date : "dd/MM/yyyy" }}
+          </p>
+          <p *ngIf="!preinscription.enfantNee">
+            <strong>Date de naissance prévue :</strong>
+            {{ preinscription.dateNaissancePrevue | date : "dd/MM/yyyy" }}
+          </p>
+          <p *ngIf="preinscription.datePrevueEntreeCreche">
+            <strong>Date d'entrée au micro-crèche :</strong>
+            {{ preinscription.datePrevueEntreeCreche | date : "dd/MM/yyyy" }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Famille -->
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingFamille">
+        <button
+          class="accordion-button collapsed"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapseFamille"
+          aria-expanded="false"
+          aria-controls="collapseFamille"
+        >
+          <i class="bi bi-people-fill me-2 small-icon"></i> Famille
+        </button>
+      </h2>
+      <div
+        id="collapseFamille"
+        class="accordion-collapse collapse"
+        aria-labelledby="headingFamille"
+        data-bs-parent="#preinscriptionAccordion"
+      >
+        <div class="accordion-body">
+          <p *ngIf="preinscription.situationFamille">
+            <strong>Situation de la famille :</strong>
+            {{ preinscription.situationFamille }}
+          </p>
+          <p *ngIf="preinscription.gardeEnfant">
+            <strong>Qui garde l'enfant :</strong>
+            {{ preinscription.gardeEnfant }}
+          </p>
+
+          <!-- Parents -->
+          <h5 class="mt-4">Parents :</h5>
+          <div
+            *ngIf="preinscription.parents?.length! > 0; else noParents"
+            class="d-flex flex-wrap gap-4 mt-3"
+          >
+            <div
+              *ngFor="let parent of preinscription.parents"
+              class="info-card p-3 shadow-sm rounded bg-light"
+            >
+              <h6 class="text-primary mb-3">
+                {{ parent.firstName || "Prénom non renseigné" }}
+                {{ parent.lastName || "Nom non renseigné" }}
+              </h6>
+              <ul class="list-unstyled small">
+                <li>
+                  <strong>📅 Date de naissance :</strong>
+                  {{ parent.dateNaissance || "Non renseignée" }}
+                </li>
+                <li>
+                  <strong>🏠 Adresse :</strong>
+                  {{ parent.adresse || "Non renseignée" }}
+                </li>
+                <li>
+                  <strong>💼 Profession :</strong>
+                  {{ parent.profession || "Non renseignée" }}
+                </li>
+                <li>
+                  <strong>📱 Portable :</strong>
+                  {{ parent.telephonePortable || "Non renseigné" }}
+                </li>
+                <li>
+                  <strong>☎️ Domicile :</strong>
+                  {{ parent.telephoneDomicile || "Non renseigné" }}
+                </li>
+                <li>
+                  <strong>✉️ Email :</strong>
+                  {{ parent.email || "Non renseigné" }}
+                </li>
+              </ul>
+            </div>
+          </div>
+          <ng-template #noParents>
+            <p class="text-muted fst-italic">Aucun parent renseigné.</p>
+          </ng-template>
+
+          <!-- Frères et Sœurs -->
+          <h5 class="mt-5">Frères et Sœurs :</h5>
+          <div
+            *ngIf="preinscription.freresSoeurs?.length! > 0; else noSiblings"
+            class="d-flex flex-wrap gap-4 mt-3"
+          >
+            <div
+              *ngFor="let fs of preinscription.freresSoeurs"
+              class="info-card p-3 shadow-sm rounded bg-light"
+            >
+              <h6 class="text-primary mb-2">
+                {{ fs.firstName }} {{ fs.lastName }}
+              </h6>
+              <p class="small mb-0">
+                <strong>📅 Date de naissance :</strong>
+                {{ fs.dateNaissance | date : "dd/MM/yyyy" }}
+              </p>
+            </div>
+          </div>
+          <ng-template #noSiblings>
+            <p class="text-muted fst-italic">Aucun frère ou sœur renseigné.</p>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+
+    <!-- Informations complémentaires -->
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingInfos">
+        <button
+          class="accordion-button collapsed"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapseInfos"
+          aria-expanded="false"
+          aria-controls="collapseInfos"
+        >
+          <i class="bi bi-card-text me-2 small-icon"></i> Informations
+          complémentaires
+        </button>
+      </h2>
+      <div
+        id="collapseInfos"
+        class="accordion-collapse collapse"
+        aria-labelledby="headingInfos"
+        data-bs-parent="#preinscriptionAccordion"
+      >
+        <div class="accordion-body">
+          <p>
+            {{
+              preinscription.informationsComplementaires ||
+                "Aucune information complémentaire fournie."
+            }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Planning -->
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingPlanning">
+        <button
+          class="accordion-button collapsed"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapsePlanning"
+          aria-expanded="false"
+          aria-controls="collapsePlanning"
+        >
+          <i class="bi bi-calendar-event me-2 small-icon"></i> Planning
+        </button>
+      </h2>
+      <div
+        id="collapsePlanning"
+        class="accordion-collapse collapse"
+        aria-labelledby="headingPlanning"
+        data-bs-parent="#preinscriptionAccordion"
+      >
+        <div class="accordion-body">
+          <!-- Jours choisis -->
+          <p>
+            <strong class="me-1">Jours choisis :</strong>
+            <span *ngIf="joursChoisisArray.length > 0; else noDays">
+              <span
+                *ngFor="let jour of joursChoisisArray"
+                class="badge bg-primary me-1"
+              >
+                {{ jour }}
+              </span>
+            </span>
+          </p>
+          <ng-template #noDays>
+            <p class="text-muted fst-italic">Aucun jour sélectionné.</p>
+          </ng-template>
+
+          <p>
+            <strong>Nombre d'heures par semaine :</strong>
+            {{ getNombreHeuresLabel(preinscription.nombreHeuresParSemaine) }}
+          </p>
+
+          <!-- Horaires -->
+          <div class="mt-4">
+            <strong>Horaires :</strong>
+            <div *ngIf="horairesArray.length > 0; else noHoraires">
+              <table class="table table-sm table-bordered mt-2">
+                <thead class="table-light">
+                  <tr>
+                    <th>Jour</th>
+                    <th>Heure Début</th>
+                    <th>Heure Fin</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let horaire of horairesArray">
+                    <td>{{ horaire.jour }}</td>
+                    <td>{{ horaire.heureDebut }}</td>
+                    <td>{{ horaire.heureFin }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <ng-template #noHoraires>
+              <p class="text-muted fst-italic">Aucun horaire renseigné.</p>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bouton Retour -->
+    <div class="mt-4">
+      <a (click)="returnToList()" class="btn btn-secondary">
+        Retour à la liste
+      </a>
+    </div>
+  </div>
+</div>

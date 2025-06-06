@@ -1,0 +1,79 @@
+<div class="container mt-5">
+  <h2 class="text-center mb-4">📜 Administration des Protocoles</h2>
+
+  <!-- Liste des protocoles existants -->
+  <div *ngFor="let protocole of protocoles" class="protocole-item">
+    <div class="protocole-card">
+      <h4>{{ protocole.titre }}</h4>
+      <p [innerHTML]="protocole.contenu"></p>
+      <div class="action-buttons">
+        <button class="btn-edit" (click)="selectProtocoleToEdit(protocole)">
+          Modifier
+        </button>
+        <button
+          class="btn-delete"
+          *ngIf="protocole.id"
+          (click)="deleteProtocole(protocole.id)"
+        >
+          Supprimer
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Formulaire de modification d'un protocole -->
+  <div *ngIf="editProtocole.titre" class="form-container">
+    <h3>Modifier le Protocole</h3>
+    <form (ngSubmit)="updateProtocole()">
+      <div class="form-group">
+        <label for="edit-titre">Titre</label>
+        <input
+          id="edit-titre"
+          [(ngModel)]="editProtocole.titre"
+          name="titre"
+          required
+          class="form-control"
+        />
+      </div>
+      <div class="form-group">
+        <label for="edit-contenu">Contenu</label>
+        <textarea
+          id="edit-contenu"
+          [(ngModel)]="editProtocole.contenu"
+          name="contenu"
+          required
+          class="form-control"
+        ></textarea>
+      </div>
+      <button type="submit" class="btn btn-submit">Modifier</button>
+    </form>
+  </div>
+
+  <!-- Formulaire d'ajout d'un protocole -->
+  <div class="form-container">
+    <h3>Ajouter un Protocole</h3>
+    <form (ngSubmit)="createProtocole()">
+      <div class="form-group">
+        <label for="titre">Titre</label>
+        <input
+          id="titre"
+          [(ngModel)]="newProtocole.titre"
+          name="titre"
+          required
+          class="form-control"
+        />
+      </div>
+      <div class="form-group">
+        <label for="contenu">Contenu</label>
+        <textarea
+          id="contenu"
+          [(ngModel)]="newProtocole.contenu"
+          name="contenu"
+          required
+          class="form-control"
+        ></textarea>
+      </div>
+      <button type="submit" class="btn btn-submit">Ajouter</button>
+    </form>
+  </div>
+</div>

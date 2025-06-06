@@ -1,0 +1,130 @@
+/* Styles généraux pour l'administration des protocoles */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Titres */
+h2 {
+  text-align: center;
+  font-size: 2rem;
+  color: #8EACCD;
+  /* Nouveau bleu */
+  margin-bottom: 40px;
+}
+
+h3 {
+  font-size: 1.5rem;
+  color: #8EACCD;
+  /* Nouveau bleu */
+  margin-top: 30px;
+}
+
+h4 {
+  font-size: 1.25rem;
+  color: #333;
+  margin-top: 15px;
+}
+
+/* Carte protocole */
+.protocole-item {
+  margin-bottom: 20px;
+}
+
+.protocole-card {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.protocole-card h4 {
+  font-size: 1.5rem;
+  color: #8EACCD;
+  /* Nouveau bleu */
+}
+
+.protocole-card p {
+  font-size: 1rem;
+  color: #555;
+}
+
+.action-buttons {
+  margin-top: 20px;
+}
+
+.action-buttons button {
+  margin-right: 10px;
+}
+
+/* Boutons */
+button {
+  background-color: #8EACCD;
+  /* Nouveau bleu */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #5f7e8c;
+  /* Couleur plus foncée */
+}
+
+/* Formulaire */
+.form-container {
+  margin-top: 40px;
+  padding: 20px;
+  background-color: #f4f4f4;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  font-size: 1rem;
+  color: #333;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #8EACCD;
+  outline: none;
+}
+
+textarea {
+  height: 150px;
+  resize: vertical;
+}
+
+.btn-submit {
+  background-color: #8EACCD;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-submit:hover {
+  background-color: #5f7e8c;
+  /* Couleur plus foncée */
+}

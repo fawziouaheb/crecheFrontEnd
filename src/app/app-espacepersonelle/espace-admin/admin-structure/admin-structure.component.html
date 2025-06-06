@@ -1,0 +1,237 @@
+<div class="container mt-5 mb-5">
+  <h2 class="text-center text-primary mb-4">Gestion des Structures</h2>
+  <app-message-display></app-message-display>
+
+  <button class="btn btn-primary mb-4" (click)="openModal()">
+    <i class="fas fa-plus me-2"></i>Ajouter une Structure
+  </button>
+
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <div class="col" *ngFor="let structure of structures">
+      <div class="card border-primary h-100">
+        <div class="card-body">
+          <h5 class="card-title text-primary">{{ structure.structureName }}</h5>
+          <p class="card-text" hidden>
+            <strong>ID :</strong> {{ structure.id }}
+          </p>
+          <p class="card-text">
+            <strong>Capacité :</strong> {{ structure.capacity }}
+          </p>
+          <p class="card-text">
+            <strong>Adresse :</strong> {{ structure.adresse }}
+          </p>
+          <p class="card-text">
+            <strong>Téléphone :</strong> {{ structure.mobile }}
+          </p>
+          <p class="card-text">
+            <strong>Statut :</strong> {{ structure.statut }}
+          </p>
+          <p class="card-text"><strong>Log :</strong> {{ structure.log }}</p>
+          <p class="card-text"><strong>Lat :</strong> {{ structure.lat }}</p>
+
+          <!-- Boutons pour modifier et supprimer -->
+          <button class="btn btn-warning" (click)="openModal(true, structure)">
+            Modifier
+          </button>
+          <button
+            class="btn btn-danger"
+            (click)="deleteStructure(structure.id!)"
+          >
+            Supprimer
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- Modale -->
+  <div *ngIf="isModalOpen" class="modal fade show d-block" tabindex="-1" aria-modal="true" role="dialog">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title">{{isEditMode ? 'Modifier' : 'Ajouter'}} une Structure</h5>
+          <button type="button" class="btn-close btn-close-white" (click)="closeModal()" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+          <form #structureForm="ngForm">
+            <div class="row">
+              <!-- Colonne gauche -->
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="structureName" class="form-label">Nom de la structure</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="structureName"
+                    [(ngModel)]="structureName"
+                    name="structureName"
+                    required
+                    #structureNameCtrl="ngModel"
+                  />
+                  <div class="text-danger" *ngIf="structureNameCtrl.invalid && (structureNameCtrl.touched || structureForm.submitted)">
+                    <small *ngIf="structureNameCtrl.errors?.['required']">Le nom est requis.</small>
+                  </div>
+                  <div *ngIf="structureNameError" class="text-danger mt-1">
+                    <small>{{ structureNameError }}</small>
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="capacity" class="form-label">Capacité</label>
+                  <input type="number" class="form-control" id="capacity"
+                         [(ngModel)]="capacity" name="capacity" required min="0">
+                </div>
+
+                <div class="mb-3">
+                  <label for="adresse" class="form-label">Adresse</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="adresse"
+                    [(ngModel)]="adresse"
+                    name="adresse"
+                    required
+                    #adresseCtrl="ngModel"
+                  />
+                  <div class="text-danger" *ngIf="adresseCtrl.invalid && (adresseCtrl.touched || structureForm.submitted)">
+                    <small *ngIf="adresseCtrl.errors?.['required']">L'adresse est requise.</small>
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="mobile" class="form-label">Téléphone</label>
+                  <input
+                    type="tel"
+                    class="form-control"
+                    id="mobile"
+                    [(ngModel)]="mobile"
+                    name="mobile"
+                    required
+                    #mobileCtrl="ngModel"
+                  />
+                  <div class="text-danger" *ngIf="mobileCtrl.invalid && (mobileCtrl.touched || structureForm.submitted)">
+                    <small *ngIf="mobileCtrl.errors?.['required']">Le numéro de téléphone est requis.</small>
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="city" class="form-label">Ville</label>
+                  <select
+                    class="form-select"
+                    id="city"
+                    [(ngModel)]="selectedCityId"
+                    name="city"
+                    required
+                    #cityCtrl="ngModel"
+                  >
+                    <option [ngValue]="null">Aucune ville</option>
+                    <option *ngFor="let city of cities" [value]="city.id">{{city.name}}</option>
+                  </select>
+                  <div class="text-danger" *ngIf="cityCtrl.invalid && (cityCtrl.touched || structureForm.submitted)">
+                    <small *ngIf="cityCtrl.errors?.['required']">La ville est requise.</small>
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="statut" class="form-label">Statut</label>
+                  <select class="form-select" id="statut" [(ngModel)]="statut" name="statut" required>
+                    <option value="actif">Actif</option>
+                    <option value="inactif">Inactif</option>
+                  </select>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Avantages</label>
+                  <div class="input-group mb-2">
+                    <input type="text" class="form-control"
+                           [(ngModel)]="newAvantage" name="newAvantage" placeholder="Ajouter un avantage">
+                    <button class="btn btn-success" type="button" (click)="addAvantage()">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
+                  <div class="avantages-list">
+                  <span *ngFor="let avantage of avantages; let i = index" class="badge bg-primary me-1 mb-1">
+                    {{avantage}}
+                    <button type="button" class="btn-close btn-close-white btn-sm ms-1"
+                            (click)="removeAvantage(i)" aria-label="Remove"></button>
+                  </span>
+                  </div>
+                  <div class="text-danger mt-1" *ngIf="submitted && avantages.length === 0">
+                    <small>Un avantage est requis.</small>
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="description" class="form-label">Description</label>
+                  <textarea class="form-control" id="description" rows="3"
+                            [(ngModel)]="description" name="description" required
+                            #descriptionCtrl="ngModel"></textarea>
+                </div>
+                <div class="text-danger" *ngIf="descriptionCtrl.invalid && (descriptionCtrl.touched || structureForm.submitted)">
+                  <small *ngIf="descriptionCtrl.errors?.['required']">Une description est requise.</small>
+                </div>
+
+              </div>
+              <!-- Colonne droite (carte et coordonnées) -->
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label class="form-label">Localisation</label>
+                  <div style="position: relative; height: 500px; min-height: 500px;">
+                    <div #mapContainer id="map" class="leaflet-map-container"></div>
+                  </div>
+                </div>
+
+                <div class="row g-2 mb-3">
+                  <div class="col-md-6">
+                    <label for="lat" class="form-label">Latitude</label>
+                    <input type="number" class="form-control" id="lat"
+                           [(ngModel)]="lat" name="lat" readonly>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="log" class="form-label">Longitude</label>
+                    <input type="number" class="form-control" id="log"
+                           [(ngModel)]="log" name="log" readonly>
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="images" class="form-label">Images</label>
+                  <input type="file" class="form-control" id="images"
+                         (change)="onFileChange($event)" accept="image/*" multiple
+                         style="max-width: 200px;">
+
+                  <div class="image-previews mt-2 d-flex flex-wrap gap-2">
+                    <div *ngFor="let image of imagePreviews; let i = index" class="position-relative">
+                      <img [src]="image" class="img-thumbnail" style="width: 100px; height: 100px; object-fit: cover;">
+                      <button type="button" class="btn-close position-absolute top-0 end-0 bg-white p-1"
+                              (click)="removeImage(i)"></button>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+
+
+          </form>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="closeModal()">
+            <i class="fas fa-times me-1"></i> Annuler
+          </button>
+          <button type="button" class="btn btn-primary"
+                  (click)="saveStructure()" [disabled]="!structureForm.form.valid">
+            <i class="fas fa-save me-1"></i> {{isEditMode ? 'Modifier' : 'Enregistrer'}}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="isModalOpen" class="modal-backdrop fade show"></div>
+</div>

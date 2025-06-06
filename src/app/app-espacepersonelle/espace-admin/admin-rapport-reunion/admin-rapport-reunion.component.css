@@ -1,0 +1,9 @@
+.container {
+    max-width: 800px;
+    margin: auto;
+  }
+  textarea {
+    width: 100%;
+    resize: vertical;
+  }
+  

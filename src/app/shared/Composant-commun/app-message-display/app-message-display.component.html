@@ -1,0 +1,10 @@
+<div class="message border p-3 mb-3" *ngIf="message" 
+     [ngClass]="{'border-primary': isSuccess, 'border-danger': !isSuccess}">
+  <div class="d-flex justify-content-between align-items-center">
+    <!-- Affichage du message de succès -->
+  <strong><p class="mb-0 font-weight-bold">{{ message }}</p></strong>
+
+    <!-- Bouton pour fermer le message -->
+    <button class="btn btn-close" (click)="closeMessage()"></button>
+  </div>
+</div>

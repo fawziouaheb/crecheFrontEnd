@@ -1,0 +1,74 @@
+<div class="container mt-5 mb-5">
+  <!-- Message d'affichage (si applicable) -->
+  <app-message-display></app-message-display>
+
+  <h2 class="text-center text-primary mb-4">Gestion des Villes</h2>
+
+  <!-- Bouton pour ajouter une ville -->
+  <div class="d-flex justify-content-end mb-4">
+    <button class="btn btn-primary" (click)="openAddCityModal()">
+      Ajouter une Ville
+    </button>
+  </div>
+
+  <!-- Liste des villes -->
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <div class="col" *ngFor="let city of cities">
+      <div class="card border-primary h-100">
+        <div class="card-body">
+          <h5 class="card-title text-primary">{{ city.name }}</h5>
+          <!-- Boutons d'action -->
+          <button
+            class="btn btn-warning me-2"
+            (click)="openEditCityModal(city)"
+          >
+            Modifier
+          </button>
+          <button class="btn btn-danger" (click)="deleteCity(city.id)">
+            Supprimer
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal pour ajouter/modifier une ville -->
+  <div
+    class="modal fade"
+    id="cityModal"
+    tabindex="-1"
+    aria-labelledby="cityModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title" id="cityModalLabel">
+            {{ isEditMode ? "Modifier" : "Ajouter" }} une Ville
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="cityName" class="form-label">Nom de la Ville</label>
+            <input
+              type="text"
+              id="cityName"
+              class="form-control"
+              [(ngModel)]="cityName"
+              placeholder="Nom de la ville"
+            />
+          </div>
+          <button class="btn btn-primary" (click)="saveCity()">
+            {{ isEditMode ? "Mettre à jour" : "Ajouter" }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

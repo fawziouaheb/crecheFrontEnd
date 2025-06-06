@@ -1,0 +1,13 @@
+<button
+  class="border p-3 rounded-3 w-100 d-flex flex-column justify-content-center align-items-center"
+  [ngClass]="bgColor"
+  style="cursor: pointer"
+  [routerLink]="allerVers"
+>
+  <p
+    *ngIf="titre"
+    class="fs-3 fw-bold text-center text-light"
+    [textContent]="titre"
+  ></p>
+  <p *ngIf="corps" class="text-center text-light" [textContent]="corps"></p>
+</button>

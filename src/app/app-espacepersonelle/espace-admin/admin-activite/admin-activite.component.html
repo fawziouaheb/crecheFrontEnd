@@ -1,0 +1,56 @@
+<div class="container">
+  <h1>Gestion des Activités</h1>
+
+  <!-- ✅ Bouton pour afficher/cacher le formulaire -->
+  <button (click)="toggleForm()" class="btn-toggle">
+    {{ showForm ? "Fermer le formulaire" : "Ajouter une activité" }}
+  </button>
+
+  <!-- ✅ Formulaire (ajout/modification) -->
+  <div *ngIf="showForm" class="form-container">
+    <h2>{{ editMode ? "Modifier" : "Créer" }} une activité</h2>
+
+    <form (ngSubmit)="createOrUpdateActivite()">
+      <label>Nom de l'activité:</label>
+      <input type="text" [(ngModel)]="newActivite.name" name="name" required />
+
+      <label>Description:</label>
+      <textarea
+        [(ngModel)]="newActivite.description"
+        name="description"
+        required
+      ></textarea>
+
+      <!-- ✅ Remplacer le champ texte URL par un champ de type fichier -->
+      <label>Image de l'activité:</label>
+      <input type="file" (change)="onImageChange($event)" accept="image/*" />
+      <!-- ✅ Aperçu de l'image sélectionnée -->
+      <div *ngIf="imagePreview" class="preview-container">
+        <p>Aperçu :</p>
+        <img [src]="imagePreview" alt="Aperçu de l'image" class="preview-image" />
+      </div>
+
+
+      <button type="submit">{{ editMode ? "Mettre à jour" : "Créer" }}</button>
+    </form>
+  </div>
+
+  <!-- ✅ Liste des activités sous forme de cartes -->
+  <div class="cards">
+    <div class="card" *ngFor="let activite of activites">
+      <!-- ✅ Affichage de l'image de l'activité -->
+      <img [src]="activite.imageUrl" alt="Image de l'activité" class="image" />
+      <h3>{{ activite.name }}</h3>
+      <div class="description-scrollable">
+        <p [innerHTML]="activite.description"></p>
+      </div>
+
+      <button (click)="editActivite(activite)" class="btn-edit">
+        Modifier
+      </button>
+      <button (click)="deleteActivite(activite.id)" class="btn-delete">
+        Supprimer
+      </button>
+    </div>
+  </div>
+</div>

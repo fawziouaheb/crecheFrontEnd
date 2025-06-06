@@ -1,0 +1,157 @@
+<div class="container mt-5 mb-5" style="padding-bottom: 100px">
+  <h2 class="text-center text-primary mb-4">Nous contacter</h2>
+  <div *ngIf="successMessage" class="alert alert-success mt-4" role="alert">
+    Votre message a été envoyé avec succès !
+  </div>
+  <div class="d-flex justify-content-center gap-4 mb-4">
+
+
+    <!-- Téléphone -->
+    <div class="d-flex align-items-center bg-light p-2 rounded">
+      <span class="me-2">📞</span>
+      <span class="fw-bold">{{ numeroTel }}</span>
+    </div>
+
+    <!-- Email -->
+    <div class="d-flex align-items-center bg-light p-2 rounded">
+      <span class="me-2">✉️</span>
+      <span class="fw-bold">creche&#64;gmail.com</span>
+    </div>
+  </div>
+  <form
+    (ngSubmit)="onSubmit()"
+    [formGroup]="contactForm"
+    class="mx-auto"
+    style="max-width: 700px; width: 100%"
+  >
+    <!-- Section "Vous" -->
+    <h5 class="text-primary mb-3">VOUS</h5>
+    <div class="row mb-3">
+      <div class="col">
+        <app-input-text-with-error
+          placeholder="Prenom"
+          [control]="contactForm.controls['firstName']"
+          inputType="text"
+        >
+        </app-input-text-with-error>
+        <div
+          *ngIf="
+            contactForm.controls['firstName'].touched &&
+            contactForm.controls['firstName'].invalid
+          "
+          class="text-danger"
+        >
+          <div *ngIf="contactForm.controls['firstName'].hasError('required')">
+            Le prénom est requis.
+          </div>
+          <div *ngIf="contactForm.controls['firstName'].hasError('minlength')">
+            Le prénom doit comporter au moins 3 caractères.
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <app-input-text-with-error
+          placeholder="Nom"
+          [control]="contactForm.controls['lastName']"
+          inputType="text"
+        >
+        </app-input-text-with-error>
+        <div
+          *ngIf="
+            contactForm.controls['lastName'].touched &&
+            contactForm.controls['lastName'].invalid
+          "
+          class="text-danger"
+        >
+          <div *ngIf="contactForm.controls['lastName'].hasError('required')">
+            Le nom est requis.
+          </div>
+          <div *ngIf="contactForm.controls['lastName'].hasError('minlength')">
+            Le nom doit comporter au moins 3 caractères.
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <app-input-text-with-error
+          placeholder="Email"
+          [control]="contactForm.controls['email']"
+          inputType="email"
+        >
+        </app-input-text-with-error>
+        <div
+          *ngIf="
+            contactForm.controls['email'].touched &&
+            contactForm.controls['email'].invalid
+          "
+          class="text-danger"
+        >
+          <div *ngIf="contactForm.controls['email'].hasError('required')">
+            L'email est requis.
+          </div>
+          <div *ngIf="contactForm.controls['email'].hasError('email')">
+            Veuillez entrer un email valide.
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <app-input-text-with-error
+          placeholder="Téléphone"
+          [control]="contactForm.controls['mobile']"
+          inputType="tel"
+        >
+        </app-input-text-with-error>
+        <div
+          *ngIf="
+            contactForm.controls['mobile'].touched &&
+            contactForm.controls['mobile'].invalid
+          "
+          class="text-danger"
+        >
+          <div *ngIf="contactForm.controls['mobile'].hasError('required')">
+            Le téléphone est requis.
+          </div>
+          <div *ngIf="contactForm.controls['mobile'].hasError('pattern')">
+            Veuillez entrer un numéro de téléphone valide.
+          </div>
+        </div>
+      </div>
+
+      <!-- Section "Votre demande" -->
+      <h5 class="text-primary mb-3">Votre demande</h5>
+      <div class="mb-3">
+        <textarea
+          class="form-control"
+          rows="5"
+          placeholder="Message"
+          aria-label="Message"
+          formControlName="message"
+        ></textarea>
+        <div
+          *ngIf="
+            contactForm.controls['message'].touched &&
+            contactForm.controls['message'].invalid
+          "
+          class="text-danger"
+        >
+          <div *ngIf="contactForm.controls['message'].hasError('required')">
+            Le message est requis.
+          </div>
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn-primary w-100"
+        [disabled]="contactForm.invalid"
+      >
+        Valider la demande
+      </button>
+    </div>
+  </form>
+
+  <!-- Message de confirmation -->
+
+</div>

@@ -1,0 +1,60 @@
+<div class="container mt-5 mb-5">
+  <!-- Composant MessageDisplay pour afficher le message -->
+  <app-message-display></app-message-display>
+
+  <h2 class="text-center text-primary mb-4">Liste des Candidatures</h2>
+
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <div class="col" *ngFor="let candidat of candidatures">
+      <div class="card border-primary h-100">
+        <div class="card-body">
+          <h5 class="card-title text-primary">
+            {{ candidat.prenom }} {{ candidat.nom }}
+          </h5>
+          <p class="card-text"><strong>Email :</strong> {{ candidat.email }}</p>
+          <p class="card-text"><strong>Ville :</strong> {{ candidat.ville }}</p>
+          <p class="card-text">
+            <strong>Type de Contrat :</strong> {{ candidat.contrat }}
+          </p>
+          <p class="card-text">
+            <strong>Postulé(e) le :</strong> {{ candidat.dateCandidate }}
+          </p>
+          <p class="card-text">
+            <strong>Date de Disponibilité :</strong>
+            {{ candidat.dateDisponibilite }}
+          </p>
+          <p class="card-text">
+            <strong>Téléphone :</strong> {{ candidat.telephone }}
+          </p>
+          <p class="card-text">
+            <strong>Structure :</strong> {{ candidat.structure }}
+          </p>
+          <p class="card-text">
+            <strong>Motivation :</strong> {{ candidat.motivation }}
+          </p>
+          <p class="card-text">
+            <strong>Statut : {{ candidat.statut }} </strong>
+          </p>
+
+          <!-- bouton pour télécharger le CV d'un candidat -->
+          <button class="btn btn-primary" (click)="downloadCV(candidat.cv)">
+            Télécharger le CV
+          </button>
+
+          <!-- Bouton pour accepter -->
+          <button
+            class="btn btn-success"
+            (click)="acceptCandidate(candidat.id)"
+          >
+            Accepter
+          </button>
+
+          <!-- Bouton pour rejeter -->
+          <button class="btn btn-danger" (click)="refuseCandidate(candidat.id)">
+            Rejeter
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

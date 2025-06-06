@@ -1,0 +1,91 @@
+/* TABLEAU STYLÉ - VERSION RESPONSIVE ET DOUCE */
+
+/* En-têtes uniquement */
+.table thead th {
+  background-color: #8EACCD;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  padding: 1rem;
+}
+
+/* Cellules normales */
+.table td {
+  background-color: white;
+  color: black;
+  text-align: center;
+  padding: 1rem;
+  font-size: 1rem;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  transition: background-color 0.3s ease;
+}
+
+/* Survol des lignes */
+.table tbody tr:hover {
+  background-color: #FFEB3B;
+  cursor: pointer;
+}
+
+/* Bordures personnalisées */
+.table-bordered {
+  border: 1px solid #8EACCD;
+}
+
+.table-bordered th,
+.table-bordered td {
+  border: 1px solid #8EACCD;
+}
+
+/* Coins arrondis en haut */
+.table thead th:first-child {
+  border-top-left-radius: 15px;
+}
+
+.table thead th:last-child {
+  border-top-right-radius: 15px;
+}
+
+/* Coins arrondis en bas (optionnel) */
+.table tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 15px;
+}
+
+.table tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 15px;
+}
+
+/* Appliquer les coins arrondis globalement */
+.table {
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+/* Boutons d’action stylisés */
+button {
+  transition: all 0.2s ease-in-out;
+  border-radius: 6px;
+  padding: 2px 8px;
+}
+
+button:hover {
+  transform: scale(1.1);
+  opacity: 0.9;
+}
+
+/* Responsive : taille réduite sur petit écran */
+@media (max-width: 576px) {
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .btn {
+    font-size: 0.9rem;
+  }
+
+  table {
+    font-size: 0.9rem;
+  }
+}

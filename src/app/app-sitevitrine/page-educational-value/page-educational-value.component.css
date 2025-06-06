@@ -1,0 +1,42 @@
+.card-header {
+  background-color: #007bff;
+}
+
+.card-header button {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
+.card-body {
+  padding: 15px;
+  background-color: #f8f9fa;
+  overflow: visible;
+  /* Assure-toi que le texte est visible sans couper */
+  max-height: none;
+  /* Permet de ne pas limiter la hauteur du conteneur */
+  transition: max-height 0.3s ease-out;
+}
+
+
+.card-header button:hover {
+  color: #f0f8ff;
+}
+
+.card-body {
+  padding: 15px;
+  background-color: #f8f9fa;
+}
+
+.card-body p {
+  margin-bottom: 15px;
+}
+
+
+
+.card-body.ngb-collapse.show {
+  max-height: 500px;
+  /* Définir une hauteur max pour l'animation, ajuste selon ton contenu */
+}

@@ -1,0 +1,66 @@
+<div class="w-100 h-100">
+  <div class="row m-0 d-flex justify-content-center">
+    <div class="mt-4">
+      <div class="container">
+        <!-- Titre responsive -->
+        <div class="mx-4 mt-4">
+          <app-app-titre
+            class="mb-5"
+            titre="Vous cherchez une place en crèche ?"
+          ></app-app-titre>
+
+          <div *ngIf="structures$ | async as structures; else loading">
+            <div *ngFor="let item of structures" class="mb-5"> <!-- Espacement entre chaque structure -->
+              <div class="container mx-auto px-0">
+                <div class="row mx-0 justify-content-center">
+                  <!-- Première colonne (image), limité à 3/12 (25%) sur les grands écrans -->
+                  <div class="col-12 col-md-2 mx-0 px-0 text-center">
+                    <img [src]="item.image" alt="alt_creche" class="img-fluid w-100" /> <!-- Image inchangée -->
+                  </div>
+
+                  <!-- Deuxième colonne, limité à 6/12 (50%) sur les grands écrans -->
+                  <div class="col-12 col-md-4 d-flex justify-content-center align-items-center flex-column mx-0 px-2 bg-third">
+                    <!-- Nom de la crèche -->
+                    <div class="w-100 mt-2">
+                      <p class="text-primary fs-6 fw-bold text-center">
+                        {{ item.structureName }}
+                      </p>
+                    </div>
+                    <!-- Première ligne dans la deuxième colonne -->
+                    <div class="w-100">
+                      <p class="d-flex fs-6 justify-content-center align-items-center">
+                        <span class="text-primary fw-bold">{{ item.capacity }} places</span>
+                        <span class="ms-1">disponible</span>
+                      </p>
+                    </div>
+                    <!-- Deuxième ligne dans la deuxième colonne -->
+                    <div class="w-100 mt-2">
+                      <p class="text-primary fs-6 fw-bold text-center">
+                        {{ item.adresse }}
+                      </p>
+                    </div>
+                  </div>
+
+                  <!-- Troisième colonne (bouton), limité à 3/12 sur les grands écrans -->
+                  <div class="col-12 col-md-2 d-flex justify-content-center align-items-center mx-0 pe-2 pb-2 bg-third">
+                    <button
+                      class="btn btn-outline-primary text-primary rounded-pill border-3 shadow-none"
+                      [routerLink]="['/fiche-creche', item.id]"
+                      (click)="onClickVoirPlus(item.id)">
+                      <p class="fs-6 mx-2 my-1 m-0">Voir plus</p>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <ng-template #loading>
+            <p>Chargement des données...</p>
+          </ng-template>
+
+        </div>
+    </div>
+  </div>
+</div>
+</div>

@@ -1,0 +1,173 @@
+<div class="w-100 h-100">
+  <div class="container-fluid mt-5 mb-5" style="padding-bottom: 100px">
+    <h2 class="text-center text-primary mb-4">Nous Rejoindre</h2>
+
+    <div class="border border-primary border-8 p-4 rounded mx-auto" style="max-width: 100%; width: 100%; max-width: 700px;">
+      <form
+        (ngSubmit)="onSubmit()"
+        [formGroup]="candidateForm"
+        class="mx-auto"
+        style="width: 100%;"
+      >
+        <!-- Nom et Prénom -->
+        <div class="row mb-3">
+          <div class="col-12 col-md-6">
+            <label for="lastName" class="form-label text-dark">Nom</label>
+            <app-input-text-with-error
+              id="lastName"
+              placeholder="Nom"
+              [control]="candidateForm.controls['lastName']"
+              inputType="text"
+            ></app-input-text-with-error>
+            <div *ngIf="candidateForm.get('lastName')?.invalid && candidateForm.get('lastName')?.touched">
+              <small class="text-danger">Le champ Nom est requis.</small>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <label for="firstName" class="form-label text-dark">Prénom</label>
+            <app-input-text-with-error
+              id="firstName"
+              placeholder="Prénom"
+              [control]="candidateForm.controls['firstName']"
+              inputType="text"
+            ></app-input-text-with-error>
+            <div *ngIf="candidateForm.get('firstName')?.invalid && candidateForm.get('firstName')?.touched">
+              <small class="text-danger">Le champ Prénom est requis.</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Email et Ville -->
+        <div class="row mb-3">
+          <div class="col-12 col-md-6">
+            <label for="email" class="form-label text-dark">Email</label>
+            <app-input-text-with-error
+              id="email"
+              placeholder="Email"
+              [control]="candidateForm.controls['email']"
+              inputType="text"
+            ></app-input-text-with-error>
+            <div *ngIf="candidateForm.get('email')?.invalid && candidateForm.get('email')?.touched">
+              <small class="text-danger">Veuillez entrer une adresse email valide.</small>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <label for="city" class="form-label text-dark">Ville</label>
+            <app-input-text-with-error
+              id="city"
+              placeholder="Ville"
+              [control]="candidateForm.controls['city']"
+              inputType="text"
+            ></app-input-text-with-error>
+            <div *ngIf="candidateForm.get('city')?.invalid && candidateForm.get('city')?.touched">
+              <small class="text-danger">Le champ Ville est requis.</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contrat et Date de disponibilité -->
+        <div class="row mb-3">
+          <div class="col-12 col-md-6">
+            <label for="contract" class="form-label text-dark">Type de contrat</label>
+            <select id="contract" class="form-select border-primary border-2" formControlName="contract">
+              <option value="" disabled selected>Choisissez un contrat</option>
+              <option value="CDI">CDI</option>
+              <option value="Stage">Stage</option>
+              <option value="Alternance">Alternance</option>
+              <option value="CDD">CDD</option>
+            </select>
+            <div *ngIf="candidateForm.get('contract')?.invalid && candidateForm.get('contract')?.touched">
+              <small class="text-danger">Veuillez sélectionner un type de contrat.</small>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <label for="dateFree" class="form-label text-dark">Date de disponibilité</label>
+            <input
+              id="dateFree"
+              type="date"
+              class="form-control border-primary border-2"
+              formControlName="dateFree"
+            />
+            <div *ngIf="candidateForm.get('dateFree')?.invalid && candidateForm.get('dateFree')?.touched">
+              <small class="text-danger">Veuillez sélectionner une date valide.</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Téléphone et Structure -->
+        <div class="row mb-3">
+          <div class="col-12 col-md-6">
+            <label for="mobile" class="form-label text-dark">Téléphone mobile</label>
+            <input
+              type="tel"
+              id="mobile"
+              class="form-control border-primary border-2"
+              placeholder="Entrez votre numéro de téléphone"
+              formControlName="mobile"
+            />
+            <div *ngIf="candidateForm.get('mobile')?.invalid && candidateForm.get('mobile')?.touched">
+              <small class="text-danger">Veuillez entrer un numéro de téléphone valide.</small>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <label for="structure" class="form-label text-dark">Choisissez une structure</label>
+            <div *ngIf="structures.length > 0">
+              <select
+                id="structure"
+                class="form-select border-primary border-2"
+                formControlName="structureId"
+              >
+                <option value="" disabled selected>Veuillez saisir la structure pour laquelle vous voulez postuler</option>
+                <option *ngFor="let structure of structures" [value]="structure.id">
+                  {{ structure.name }}
+                </option>
+              </select>
+            </div>
+            <div *ngIf="candidateForm.get('structureId')?.invalid && candidateForm.get('structureId')?.touched">
+              <small class="text-danger">Veuillez sélectionner une structure.</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- CV -->
+        <div class="row mb-3">
+          <div class="col-12">
+            <label for="CV" class="form-label text-dark">Télécharger votre CV (PDF)</label>
+            <input
+              type="file"
+              id="cv"
+              class="form-control border-primary border-2"
+              (change)="onFileChange($event)"
+              formControlName="cv"
+            />
+            <div *ngIf="candidateForm.get('cv')?.invalid && candidateForm.get('cv')?.touched">
+              <small class="text-danger">Veuillez télécharger un fichier valide au format PDF.</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Message de motivation -->
+        <div class="mb-3">
+          <textarea
+            class="form-control border-primary border-2"
+            rows="5"
+            placeholder="Message"
+            aria-label="Message"
+            formControlName="motivation"
+          ></textarea>
+          <div *ngIf="candidateForm.get('motivation')?.invalid && candidateForm.get('motivation')?.touched">
+            <small class="text-danger">Veuillez entrer votre message de motivation.</small>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100 text-white fw-bold">
+          Valider la demande
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

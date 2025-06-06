@@ -1,0 +1,52 @@
+/* Style pour le container principal */
+.container {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    color: #333;
+  }
+  
+  /* Style pour la card */
+  .card {
+    border-radius: 15px;
+  }
+  
+  .card-header {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  /* Style pour les icônes */
+  .fas {
+    color: #FF6F61;
+    margin-right: 10px;
+  }
+  
+  /* Réduire la taille des icônes pour un effet plus élégant */
+  .fas.fa-user, .fas.fa-phone, .fas.fa-envelope, .fas.fa-home, .fas.fa-baby, .fas.fa-comment {
+    font-size: 1.2rem;
+  }
+  
+  /* Card children */
+  .card-body {
+    font-size: 1rem;
+    background-color: #f9f9f9;
+  }
+  
+  /* Améliorer l'apparence mobile */
+  @media (max-width: 768px) {
+    .container {
+      padding: 15px;
+    }
+  
+    .card-body {
+      padding: 15px;
+    }
+  
+    .card-header {
+      font-size: 1rem;
+    }
+  }
+  .text-primary {
+    color: #007bff !important;
+    font-weight: bold;
+  }
+    

@@ -1,0 +1,193 @@
+<div class="container my-5">
+  <h2
+    class="text-center mb-4"
+    style="font-family: 'Comic Sans MS', cursive; color: #ff6f61"
+  >
+    Dossier du Parent
+  </h2>
+
+  <div class="row">
+    <!-- Informations sur le Premier Parent -->
+    <div class="col-md-6">
+      <div class="card mb-4 shadow-sm">
+        <div class="card-header bg-primary text-white">
+          <i class="fas fa-user-tie"></i> Informations sur le Parent 1
+        </div>
+        <div class="card-body">
+          <div class="mb-2">
+            <i class="fas fa-user"></i> <strong>Nom :</strong>
+            {{ parent.firstName }} {{ parent.lastName }}
+          </div>
+          <div class="mb-2">
+            <i class="fas fa-briefcase"></i> <strong>Profession :</strong>
+            {{ parent.profession }}
+          </div>
+          <div class="mb-2">
+            <i class="fas fa-heart"></i> <strong>Situation familiale :</strong>
+            {{ parent.familySituation }}
+          </div>
+          <div class="mb-2">
+            <i class="fas fa-phone"></i> <strong>Téléphone :</strong>
+            {{ parent.mobile }}
+          </div>
+          <div class="mb-2">
+            <i class="fas fa-envelope"></i> <strong>Email :</strong>
+            {{ parent.email }}
+          </div>
+          <div class="mb-2">
+            <i class="fas fa-home"></i> <strong>Adresse :</strong>
+            {{ parent.address }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Informations sur le Deuxième Parent -->
+    @if(parent.secondParentFirstName && parent.secondParentLastName &&
+    parent.secondParentEmail && parent.secondParentMobile){
+    <div class="col-md-6">
+      <div class="card mb-4 shadow-sm">
+        <div class="card-header bg-success text-white">
+          <i class="fas fa-user-tie"></i> Informations sur le Parent 2
+        </div>
+        <div class="card-body">
+          <div class="mb-2">
+            <i class="fas fa-user"></i> <strong>Nom :</strong>
+            {{ parent.secondParentFirstName }} {{ parent.secondParentLastName }}
+          </div>
+          <div class="mb-2">
+            <i class="fas fa-briefcase"></i> <strong>Profession :</strong>
+            {{ parent.secondParentProfession }}
+          </div>
+          <div class="mb-2">
+            <i class="fas fa-heart"></i> <strong>Situation familiale :</strong>
+            {{ parent.secondParentFamilySituation }}
+          </div>
+          <div class="mb-2">
+            <i class="fas fa-phone"></i> <strong>Téléphone :</strong>
+            {{ parent.secondParentMobile }}
+          </div>
+          <div class="mb-2">
+            <i class="fas fa-envelope"></i> <strong>Email :</strong>
+            {{ parent.secondParentEmail }}
+          </div>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+
+  <!-- Section Enfants -->
+  <div class="card mb-4 shadow-sm">
+    <div class="card-header bg-warning text-dark">
+      <i class="fas fa-child"></i> Informations sur les Enfants
+    </div>
+    <div class="card-body">
+      <div
+        *ngFor="let child of parent.children"
+        class="border-bottom pb-3 mb-3"
+      >
+        <h5 class="text-primary">
+          <i class="fas fa-baby"></i> {{ child.firstName }} {{ child.lastName }}
+        </h5>
+        <div>
+          <i class="fas fa-calendar-alt"></i>
+          <strong>Date de naissance :</strong> {{ child.date_birth_child }}
+        </div>
+        <div class="mt-2">
+          <i class="fas fa-calendar-alt"></i>
+          <strong>Date d'entrée :</strong>
+          <span class="badge bg-info">{{ child.entryDate }}</span>
+        </div>
+
+        <!-- Horaires -->
+        <div class="mt-4">
+          <strong>Horaires :</strong>
+          <div *ngIf="child.horaires?.length! > 0; else noHoraires">
+            <table class="table table-sm table-bordered mt-2">
+              <thead class="table-light">
+                <tr>
+                  <th>Jour</th>
+                  <th>Heure Début</th>
+                  <th>Heure Fin</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let horaire of getHoraires(child)">
+                  <td>{{ horaire.jour }}</td>
+                  <td>{{ horaire.heureDebut }}</td>
+                  <td>{{ horaire.heureFin }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <ng-template #noHoraires>
+            <p class="text-muted fst-italic">Aucun horaire renseigné.</p>
+          </ng-template>
+        </div>
+
+        <div>
+          <i class="fas fa-clipboard-list"></i>
+          <strong>Formule de garde :</strong>
+          {{ child.formula || "Non spécifiée" }}
+        </div>
+        <div>
+          <i class="fas fa-comment"></i> <strong>Observation :</strong>
+          {{ child.observation || "Aucune" }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <label for="fileUpload" class="form-label"
+      >Ajouter un fichier PDF au dossier du parent :</label
+    >
+    <input
+      type="file"
+      id="fileUpload"
+      (change)="onFileSelected($event)"
+      accept="application/pdf"
+      class="form-control"
+    />
+    <button class="btn btn-primary mt-2" (click)="uploadFile()">
+      Téléverser
+    </button>
+  </div>
+
+  <!-- Liste des documents du parent -->
+  <div class="card mb-4 shadow-sm">
+    <div class="card-header bg-info text-white">
+      <i class="fas fa-file-alt"></i> Documents du Parent
+    </div>
+    <div class="card-body">
+      <ul class="list-group">
+        <li
+          *ngFor="let file of parent.files"
+          class="list-group-item d-flex justify-content-between align-items-center"
+        >
+          <span
+            ><i class="fas fa-file-pdf text-danger"></i>
+            {{ file.fileName }}</span
+          >
+
+          <div>
+            <button
+              class="btn btn-sm btn-success me-2"
+              (click)="downloadFile(file.fileName)"
+            >
+              <i class="fas fa-download"></i>
+            </button>
+
+            <button
+              class="btn btn-sm btn-danger"
+              (click)="deleteFile(file.fileName)"
+            >
+              <i class="fas fa-trash-alt"></i>
+            </button>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

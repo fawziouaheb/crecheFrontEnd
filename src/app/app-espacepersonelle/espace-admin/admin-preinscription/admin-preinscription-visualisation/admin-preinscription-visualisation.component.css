@@ -1,0 +1,55 @@
+/* Taille réduite des icônes */
+.small-icon {
+  font-size: 1.2rem;
+  color: white;
+}
+
+/* Style des boutons d'accordion */
+.accordion-button {
+  background-color: #8EACCD;
+  color: white;
+  font-weight: 500;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.accordion-button.collapsed {
+  background-color: #f8f9f9;
+  color: #333;
+}
+
+.accordion-button.collapsed .small-icon {
+  color: #333;
+}
+
+.accordion-button::after {
+  transition: transform 0.3s ease;
+}
+
+.accordion-button:not(.collapsed)::after {
+  transform: rotate(90deg);
+}
+
+.accordion-button:hover {
+  background-color: #7a9cbc;
+}
+
+/* Bordure douce */
+.accordion-item {
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #dee2e6;
+}
+
+/* Style cartes */
+.info-card {
+  min-width: 220px;
+  max-width: 280px;
+  border: 1px solid #dee2e6;
+  background-color: #f8f9fa;
+  transition: transform 0.2s, box-shadow 0.3s;
+}
+
+.info-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

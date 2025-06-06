@@ -1,0 +1,82 @@
+<div class="container mt-4">
+  <h2 class="mb-4">Avis des Parents</h2>
+
+  <div *ngFor="let feedback of feedbacks" class="card mb-3 shadow-sm border-primary">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start mb-2">
+        <div>
+          <h5 class="card-title mb-0">{{ feedback.parentName }}</h5>
+          <small class="text-muted">{{ feedback.date }}</small>
+        </div>
+        <div>
+          <ng-container *ngFor="let _ of getStars(feedback.rating)">
+            <i class="bi bi-star-fill text-warning"></i>
+          </ng-container>
+          <ng-container *ngFor="let _ of getEmptyStars(feedback.rating)">
+            <i class="bi bi-star text-secondary"></i>
+          </ng-container>
+        </div>
+      </div>
+      <p class="card-text">{{ feedback.message }}</p>
+    </div>
+  </div>
+
+
+  <div class="card shadow-sm mt-5 border-primary">
+    <div class="card-header bg-primary text-white">
+      Laisser un avis
+    </div>
+    <div class="card-body">
+      <form (ngSubmit)="submitAvis()" #avisForm="ngForm">
+        <div class="mb-3">
+          <label for="parentName" class="form-label text-primary fw-semibold">Nom du parent</label>
+          <input
+            type="text"
+            class="form-control border-primary"
+            id="parentName"
+            name="parentName"
+            [(ngModel)]="newFeedback.parentName"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="rating" class="form-label text-primary fw-semibold">Note</label>
+          <select
+            class="form-select border-primary"
+            id="rating"
+            name="rating"
+            [(ngModel)]="newFeedback.rating"
+            required
+          >
+            <option [ngValue]="5">★★★★★ - Excellent</option>
+            <option [ngValue]="4">★★★★ - Très bien</option>
+            <option [ngValue]="3">★★★ - Bien</option>
+            <option [ngValue]="2">★★ - Moyen</option>
+            <option [ngValue]="1">★ - Mauvais</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="message" class="form-label text-primary fw-semibold">Message</label>
+          <textarea
+            class="form-control border-primary"
+            id="message"
+            name="message"
+            rows="3"
+            [(ngModel)]="newFeedback.message"
+            required
+          ></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary" [disabled]="!avisForm.form.valid">
+          Envoyer l'avis
+        </button>
+      </form>
+    </div>
+  </div>
+  <div style="height: 100px;"></div>
+
+
+</div>
+<!-- Formulaire d'ajout d'avis -->

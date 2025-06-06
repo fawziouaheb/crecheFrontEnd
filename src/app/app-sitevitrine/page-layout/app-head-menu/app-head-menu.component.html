@@ -1,0 +1,62 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom border-primary">
+  <div class="container-fluid">
+    <!-- Bouton hamburger (mobile) -->
+    <button
+      class="navbar-toggler border-0"
+      type="button"
+      (click)="toggleNavbar()"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Menu de navigation -->
+    <div
+      [ngClass]="{ collapse: isNavbarCollapsed, 'navbar-collapse': true }"
+      id="navbarNav"
+    >
+      <ul
+        class="navbar-nav d-flex justify-content-center w-100"
+        [ngClass]="{ 'gap-5': isNavbarCollapsed }"
+      >
+        <li class="nav-item">
+          <a class="nav-link active text-primary drop-shadow" aria-current="page" href="#">
+            Information
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-primary drop-shadow" [routerLink]="router.PROMOTION">
+            Qui sommes-nous ?
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-primary drop-shadow" [routerLink]="router.ACTIVITE">
+            Activité
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-primary drop-shadow" [routerLink]="router.CONTACT">
+            Nous contacter
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-primary drop-shadow" [routerLink]="router.PREINSCRIPTION">
+            Pré-inscription
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-primary drop-shadow" [routerLink]="">
+            Accueil
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-primary drop-shadow" [routerLink]="router.CANDIDAT">
+            Nous Rejoindre ?
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

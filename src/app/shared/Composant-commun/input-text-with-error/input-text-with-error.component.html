@@ -1,0 +1,17 @@
+<div class="position-relative">
+  <div class="d-flex align-items-center justify-content-between">
+    <label class="form-label mb-1">{{ label }}</label>
+    <span *ngIf="isRequired" class="text-danger" style="font-size: 1rem"
+      >*</span
+    >
+  </div>
+  <input
+    [type]="inputType"
+    class="form-control"
+    [placeholder]="placeholder"
+    [formControl]="formControl"
+  />
+  <div *ngIf="control.touched && control.invalid" class="text-danger mt-1">
+    <small>{{ getErrorMessage() }}</small>
+  </div>
+</div>

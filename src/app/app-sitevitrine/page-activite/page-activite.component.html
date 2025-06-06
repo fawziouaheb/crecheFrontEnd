@@ -1,0 +1,32 @@
+<h2>Galerie de photos</h2>
+<div class="gallery-container" *ngIf="activites.length > 0">
+  <button class="prev" (click)="prevImage()">&#10094;</button>
+
+  <div class="image-container">
+    <img [src]="activites[currentIndex].imageUrl" alt="Image" class="image" />
+  </div>
+
+  <button class="next" (click)="nextImage()">&#10095;</button>
+</div>
+
+<p *ngIf="activites.length === 0">Aucune activité disponible pour le moment.</p>
+<div class="image-description-container">
+  <div
+    *ngFor="let activite of activites; let i = index"
+    class="image-description-item"
+    [ngClass]="{ reverse: i % 2 !== 0 }"
+  >
+    <div class="image-box">
+      <img [src]="activite.imageUrl" alt="{{ activite.name }}" class="image" />
+    </div>
+    <div class="description-box">
+      <!-- Placer le nom de l'activité avant la description -->
+      <p class="activity-name">{{ i + 1 }}. {{ activite.name }}</p>
+      <!-- Afficher le nom de l'activité -->
+      <p
+        class="description"
+        [innerHTML]="convertToHtml(activite.description)"
+      ></p>
+    </div>
+  </div>
+</div>

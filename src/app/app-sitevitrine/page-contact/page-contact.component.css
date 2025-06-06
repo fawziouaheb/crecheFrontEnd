@@ -1,0 +1,117 @@
+h2 {
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
+}
+
+/* Style du formulaire */
+form {
+  background-color: #ffffff;
+  /* Couleur de fond claire */
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0);
+  /* Légère ombre */
+}
+
+/* Personnalisation des champs de saisie et du textarea */
+input,
+textarea {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+/* Style des boutons */
+button {
+  background-color: #8EACCD;
+  color: #ffffff;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+button:hover {
+  background-color: #8EACCD;
+  /* Couleur légèrement plus sombre au survol */
+}
+
+/* Fond clair pour le téléphone et l'email */
+.bg-light {
+  background-color: #f5f5f5 !important;
+}
+
+img {
+  object-fit: cover;
+}
+
+/* Personnalisation des champs de saisie et du textarea */
+input.form-control,
+textarea.form-control {
+  border: 2px solid #8EACCD;
+  /* Couleur bleue de la page */
+  border-radius: 15px;
+  /* Arrondir les coins des champs */
+  padding: 0.5rem;
+  /* Ajouter du padding pour espacer le texte des bords */
+  margin-bottom: 15px;
+  /* ✅ Espacement entre les champs */
+}
+
+/* Ajouter un effet au focus des champs */
+input.form-control:focus,
+textarea.form-control:focus {
+  border-color: #8EACCD;
+  /* Couleur bleue plus foncée quand le champ est sélectionné */
+  box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
+  /* Légère ombre bleue */
+}
+
+/* ✅ Espacement autour des champs */
+input.form-control,
+textarea.form-control {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-bottom: 20px;
+  /* ✅ Plus d'espace entre les champs */
+}
+
+/* ✅ Espacement entre les colonnes (Prénom & Nom) */
+.row {
+  gap: 15px;
+  /* Espace horizontal entre les colonnes */
+  margin-bottom: 15px;
+  /* Espace sous la ligne des deux colonnes */
+}
+
+/* ✅ Espacement entre les sections VOUS et Votre demande */
+h5 {
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+
+/* ✅ Responsive pour le numéro de téléphone et l'email */
+@media (max-width: 576px) {
+  .d-flex.justify-content-center.gap-4 {
+    flex-direction: column;
+    /* Affiche en colonne sur mobile */
+    align-items: center;
+    /* Centre les éléments */
+    gap: 10px;
+    /* Espacement entre les éléments */
+  }
+
+  .d-flex.align-items-center.bg-light {
+    width: 100%;
+    /* Prend toute la largeur disponible */
+    justify-content: center;
+    /* Centre le contenu horizontalement */
+    padding: 10px;
+    /* Espacement intérieur */
+  }
+
+  .fw-bold {
+    font-size: 16px;
+    /* Police légèrement plus grande pour la lisibilité */
+    word-break: break-word;
+    /* Évite que le texte dépasse la largeur */
+  }
+}

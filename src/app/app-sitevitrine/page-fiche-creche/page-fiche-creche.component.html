@@ -1,0 +1,55 @@
+<div class="creche-container">
+  <!-- Section en haut : Images et avantages -->
+  <div class="top-section">
+    <!-- Galerie d'images à gauche -->
+    <div class="image-gallery">
+      <div class="gallery-container">
+        <img [src]="currentImage" alt="Image de la crèche" class="gallery-image">
+        <button class="nav-button prev-button" (click)="prevImage()">&#10094;</button>
+        <button class="nav-button next-button" (click)="nextImage()">&#10095;</button>
+      </div>
+    </div>
+
+    <!-- Avantages à droite -->
+    <div class="creche-advantages">
+      <h1>Le + de la crèche</h1>
+      <ul>
+        <li *ngFor="let advantage of structure?.avantages">{{ advantage }}</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Section en bas : Description et localisation -->
+  <div class="bottom-section">
+    <!-- Description à gauche -->
+    <div class="creche-description">
+      <h2>{{ structure?.structureName }}</h2>
+      <p><strong>Adresse :</strong> {{ structure?.adresse }}</p>
+      <p><strong>Capacité d'accueil :</strong> {{ structure?.capacity }}</p>
+      <p><strong>Description :</strong> {{ structure?.description }}</p>
+    </div>
+
+    <!-- Localisation à droite -->
+
+
+
+    <!-- Localisation à droite -->
+    <div class="creche-location">
+      <h3>Localisation</h3>
+      <div class="map-container" style="height: 300px;">
+        <div id="leafletMapDetails" class="leaflet-map-container" style="height: 100%;"></div>
+      </div>
+    </div>
+
+  </div>
+
+
+
+  <!-- Bouton de pré-inscription -->
+  <div class="creche-actions">
+    <button (click)="navigateToPreinscription()" class="preinscription-button">
+      Préinscrire
+    </button>
+
+  </div>
+</div>

@@ -1,0 +1,63 @@
+// Importation des fichiers nécessaires de Bootstrap
+@import '../node_modules/bootstrap/scss/functions';
+@import '../node_modules/bootstrap/scss/variables';
+@import '../node_modules/bootstrap/scss/mixins';
+
+// Personnalisation des couleurs
+$primary: #8EACCD;
+$secondary: #E5E7E6;
+$third: #FDFAD9;
+
+
+
+// Modifier les couleurs du thème
+$theme-colors: map-merge($theme-colors, ("primary": $primary, "secondary": $secondary, "third": $third));
+
+.drop-shadow {
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.4));
+}
+
+// Importation de Bootstrap SCSS après personnalisation des variables
+@import '../node_modules/bootstrap/scss/bootstrap';
+
+
+:root {
+  --primary-bg: #A7C7E7;  // Bleu pastel
+  --secondary-bg: #B5E7A0; // Vert tendre
+  --third-bg: #FFDAB9; // Pêche doux
+  --fourty-bg: #f1c40f98;
+  --text-color: #5A5A5A;
+}
+body {
+  background-color: #E9E9E9;
+}
+
+.toast {
+  border-radius: 50% !important;
+  padding: 0.75rem 1.5rem !important;
+  font-weight: 500;
+  font-size: 1rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  display: inline-flex !important;
+  align-items: center;
+  gap: 0.75rem;
+  max-width: 100%;
+}
+
+/* Couleur de fond pour les toasts de succès */
+.toast-success {
+  background-color: #8EACCD !important;
+  color: #fff !important;
+}
+
+/* Couleur de fond pour les toasts d'erreur */
+.toast-error {
+  background-color: #E57373 !important;
+  /* Un rouge doux */
+  color: #fff !important;
+}
+
+.toast-container.toast-bottom-left {
+  left: 1rem;
+  bottom: 1rem;
+}

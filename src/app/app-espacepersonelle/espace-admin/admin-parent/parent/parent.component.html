@@ -1,0 +1,287 @@
+<div class="container">
+  <h2 class="text-center">Créer un compte parent</h2>
+
+  <form [formGroup]="parentForm" (ngSubmit)="onSubmit()">
+    <!-- Premier Parent -->
+    <h4>Premier Parent</h4>
+    <div class="form-group">
+      <label>Nom</label>
+      <input
+        formControlName="lastName"
+        class="form-control"
+        type="text"
+        placeholder="Nom du parent"
+      />
+    </div>
+
+    <div class="form-group">
+      <label>Prénom</label>
+      <input
+        formControlName="firstName"
+        class="form-control"
+        type="text"
+        placeholder="Prénom du parent"
+      />
+    </div>
+
+    <div class="form-group">
+      <label>Date de naissance</label>
+      <input formControlName="dateBirth" class="form-control" type="date" />
+    </div>
+
+    <div class="form-group">
+      <label>Email</label>
+      <input
+        formControlName="email"
+        class="form-control"
+        type="email"
+        placeholder="Email du parent"
+      />
+    </div>
+
+    <div class="form-group">
+      <label>Téléphone</label>
+      <input
+        formControlName="mobile"
+        class="form-control"
+        type="tel"
+        placeholder="Téléphone du parent"
+      />
+    </div>
+
+    <div class="form-group">
+      <label>Adresse</label>
+      <textarea
+        formControlName="address"
+        class="form-control"
+        placeholder="Adresse du parent"
+      ></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Profession</label>
+      <input
+        formControlName="profession"
+        class="form-control"
+        type="text"
+        placeholder="Profession du parent"
+      />
+    </div>
+
+    <div class="form-group">
+      <label>Situation familiale</label>
+      <select formControlName="familySituation" class="form-control">
+        <option value="marié">Marié(e)</option>
+        <option value="union libre">Union libre</option>
+        <option value="pacsé">Pacsé(e)</option>
+        <option value="séparé">Séparé(e)</option>
+        <option value="célibataire">Célibataire</option>
+        <option value="veuf">Veuf(ve)</option>
+        <option value="divorcé">Divorcé(e)</option>
+      </select>
+    </div>
+    <!-- Deuxième Parent -->
+    <h4>Deuxième Parent (Facultatif)</h4>
+    <div class="form-group">
+      <label>Nom</label>
+      <input
+        formControlName="secondParentLastName"
+        class="form-control"
+        type="text"
+        placeholder="Nom du deuxième parent"
+      />
+    </div>
+
+    <div class="form-group">
+      <label>Prénom</label>
+      <input
+        formControlName="secondParentFirstName"
+        class="form-control"
+        type="text"
+        placeholder="Prénom du deuxième parent"
+      />
+    </div>
+
+    <div class="form-group">
+      <label>Email</label>
+      <input
+        formControlName="secondParentEmail"
+        class="form-control"
+        type="email"
+        placeholder="Email du deuxième parent"
+      />
+    </div>
+
+    <div class="form-group">
+      <label>Téléphone</label>
+      <input
+        formControlName="secondParentMobile"
+        class="form-control"
+        type="tel"
+        placeholder="Téléphone du deuxième parent"
+      />
+    </div>
+
+    <div class="form-group">
+      <label>Adresse</label>
+      <textarea
+        formControlName="secondParentAddress"
+        class="form-control"
+        placeholder="Adresse du deuxième parent"
+      ></textarea>
+    </div>
+    <div class="form-group">
+      <label>Profession (Deuxième parent)</label>
+      <input
+        formControlName="secondParentProfession"
+        class="form-control"
+        type="text"
+        placeholder="Profession du deuxième parent"
+      />
+    </div>
+
+    <div class="form-group">
+      <label>Situation familiale (Deuxième parent)</label>
+      <select
+        formControlName="secondParentFamilySituation"
+        class="form-control"
+      >
+        <option value="marié">Marié(e)</option>
+        <option value="union libre">Union libre</option>
+        <option value="pacsé">Pacsé(e)</option>
+        <option value="séparé">Séparé(e)</option>
+        <option value="célibataire">Célibataire</option>
+        <option value="veuf">Veuf(ve)</option>
+        <option value="divorcé">Divorcé(e)</option>
+      </select>
+    </div>
+
+    <!-- Enfants -->
+    <h4>Enfants</h4>
+    <div formArrayName="children">
+      <div
+        *ngFor="let child of children.controls; let j = index"
+        [formGroupName]="j"
+        class="child-container"
+      >
+        <div class="form-group">
+          <label>Nom</label>
+          <input
+            formControlName="lastName"
+            class="form-control"
+            type="text"
+            placeholder="Nom de l'enfant"
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Prénom</label>
+          <input
+            formControlName="firstName"
+            class="form-control"
+            type="text"
+            placeholder="Prénom de l'enfant"
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Date de naissance</label>
+          <input formControlName="dateBirth" class="form-control" type="date" />
+        </div>
+        <div class="form-group">
+          <label>Date d'entrée</label>
+          <input formControlName="entryDate" class="form-control" type="date" />
+        </div>
+
+        <div class="form-group">
+          <label>Sexe</label>
+          <select formControlName="gender" class="form-control">
+            <option value="male">Garçon</option>
+            <option value="female">Fille</option>
+          </select>
+        </div>
+        <!-- Type de garde de l'enfant  -->
+        <div
+          *ngFor="
+            let day of [
+              'Lundi',
+              'Mardi',
+              'Mercredi',
+              'Jeudi',
+              'Vendredi',
+              'Samedi',
+              'Dimanche'
+            ];
+            let i = index
+          "
+        >
+          <input
+            type="checkbox"
+            [value]="day"
+            (change)="onDayChange($event, j)"
+            [checked]="children.at(j).get('daysOfCare')?.value?.includes(day)"
+          />
+          {{ day }}
+        </div>
+
+        <!-- Formule de garde -->
+        <div class="form-group">
+          <label>Formule de garde</label>
+          <select formControlName="formula" class="form-control">
+            <option value="50h+">50 heures et plus</option>
+            <option value="40-49h">40 à 49 heures</option>
+            <option value="30-39h">30 à 39 heures</option>
+            <option value="20-29h">20 à 29 heures</option>
+            <option value="0-19h">0 à 19 heures</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Observation</label>
+          <textarea
+            formControlName="observation"
+            class="form-control"
+            placeholder="Observations sur l'enfant"
+          ></textarea>
+        </div>
+
+        <button type="button" class="btn btn-danger" (click)="removeChild(j)">
+          Supprimer cet enfant
+        </button>
+      </div>
+    </div>
+
+    <button type="button" class="btn btn-primary" (click)="addChild()">
+      Ajouter un enfant
+    </button>
+
+    <!-- Informations supplémentaires -->
+    <h4>Informations supplémentaires</h4>
+    <div class="form-group">
+      <label>Structure</label>
+      <select formControlName="structureId" class="form-control">
+        <option *ngFor="let structure of structures" [value]="structure.id">
+          {{ structure.structureName }}
+        </option>
+      </select>
+    </div>
+
+    <!-- <div class="form-group">
+      <label>Rôle</label>
+      <select formControlName="role" class="form-control">
+        <option *ngFor="let role of roles" [value]="role.id">
+          {{ role.roleName }}
+        </option>
+      </select>
+    </div> -->
+
+    <button
+      type="submit"
+      class="btn btn-primary btn-block"
+      [disabled]="parentForm.invalid"
+    >
+      Soumettre
+    </button>
+  </form>
+
+  <div *ngIf="message" class="alert alert-success mt-3">{{ message }}</div>
+</div>
